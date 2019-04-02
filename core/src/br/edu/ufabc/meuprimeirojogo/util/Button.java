@@ -12,6 +12,7 @@ public class Button {
 	public Button(String filename){
 		texture = new Texture(Gdx.files.internal(filename));
 	}
+	
 	public Button(String filename, float x, float y) {
 		this(filename);
 		this.posX = x;

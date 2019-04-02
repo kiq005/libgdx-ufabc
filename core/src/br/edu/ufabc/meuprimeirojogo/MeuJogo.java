@@ -1,6 +1,8 @@
 package br.edu.ufabc.meuprimeirojogo;
 
 
+import java.io.File;
+
 import javax.swing.plaf.synth.SynthSeparatorUI;
 
 import com.badlogic.gdx.Game;
@@ -8,6 +10,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.math.Vector3;
@@ -28,32 +31,30 @@ public class MeuJogo extends Game implements InputProcessor {
 
 	@Override
 	public void create() {
-		// TODO Auto-generated method stub
 		modelBuider = new ModelBuilder();
 		assetManager = new AssetManager();
 		gamePad      = new GamePad(false);
 		Gdx.input.setInputProcessor(this);
-
-		assetManager.load("cenario/banco.g3db", Model.class);
-		assetManager.load("cenario/lixo.g3db", Model.class);
-		assetManager.load("cenario/lixeira.g3db", Model.class);
-		assetManager.load("cenario/cenario.g3db", Model.class);
-		assetManager.load("cenario/poste.g3db", Model.class);
-		assetManager.load("robot/Robot_idle.g3db", Model.class);
-		assetManager.load("robot/Robot_death.g3db", Model.class);
-		assetManager.load("robot/Robot_run.g3db", Model.class);
-		assetManager.load("robot/Robot_OneShoot.g3db", Model.class);
-		assetManager.load("orc/Orc_Death.g3db", Model.class);
-		assetManager.load("orc/Orc_idle.g3db", Model.class);
-		assetManager.load("orc/Orc_run.g3db", Model.class);
-		assetManager.load("orc/Orc_shoot.g3db", Model.class);
-		assetManager.load("shot_orc/shot.g3db", Model.class);
-		assetManager.load("shot_robot/shot.g3db", Model.class);
 		
+		// TODO: Change loading scheme to level-based load
+		// - It can be done using a json file to describe what should be loaded (best solution)
+		// - Or separate the folders on things to be always loaded and leve-specific things
+		loadAllFilesInFolder(Gdx.files.internal("./Level/g3db/"));
 		
 		currentScreen = new StartScreen("START");
 		setScreen(currentScreen);
 
+	}
+	
+	public void loadAllFilesInFolder(final FileHandle fileHandle) {
+	    for (final FileHandle fileEntry : fileHandle.list()) {
+	        if (fileEntry.isDirectory()) {
+	        	loadAllFilesInFolder(fileEntry);
+	        } else {
+	        	if(fileEntry.extension().equals("g3db"))
+	        		assetManager.load(fileEntry.path(), Model.class);
+	        }
+	    }
 	}
 
 	public void render() {

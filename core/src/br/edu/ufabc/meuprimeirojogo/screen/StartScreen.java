@@ -34,8 +34,8 @@ public class StartScreen extends MyScreen {
 		spriteBatch = new SpriteBatch();
 		viewMatrix = new Matrix4();
 		tranMatrix = new Matrix4();
-		bitmapFont = new BitmapFont(Gdx.files.internal("fonts/myfont.fnt"));
-		sounds = Gdx.audio.newMusic(Gdx.files.internal("sounds/loopshot2.mp3"));
+		bitmapFont = new BitmapFont(Gdx.files.internal("Fonts/myfont.fnt"));
+		sounds = Gdx.audio.newMusic(Gdx.files.internal("SFX/loopshot2.mp3"));
 		sounds.setLooping(true);
 		//sounds.play();
 		
@@ -72,9 +72,9 @@ public class StartScreen extends MyScreen {
 		Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		// define que vou usar a cor preta (0,0,0,0)
 		Gdx.gl20.glClearColor(0, 0, 0, 0);
-		viewMatrix.setToOrtho2D(0, 0, Utilities.GAME_WIDTH, Utilities.GAME_HEIGHT); // defino a "configuração da resolução"
-		spriteBatch.setProjectionMatrix(viewMatrix); // buffer irá seguir essa configuração
-		spriteBatch.setTransformMatrix(tranMatrix); // toda vez q redimensionar a tela, armazene as distorçoes na matriz
+		viewMatrix.setToOrtho2D(0, 0, Utilities.GAME_WIDTH, Utilities.GAME_HEIGHT); // defino a "configuraï¿½ï¿½o da resoluï¿½ï¿½o"
+		spriteBatch.setProjectionMatrix(viewMatrix); // buffer irï¿½ seguir essa configuraï¿½ï¿½o
+		spriteBatch.setTransformMatrix(tranMatrix); // toda vez q redimensionar a tela, armazene as distorï¿½oes na matriz
 
 		spriteBatch.begin();
 		spriteBatch.draw(texture, 0, 0, Utilities.GAME_WIDTH, Utilities.GAME_HEIGHT, 0, 0, 800, 600, false, false);

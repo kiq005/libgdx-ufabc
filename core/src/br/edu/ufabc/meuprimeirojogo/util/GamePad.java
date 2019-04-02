@@ -17,10 +17,10 @@ public class GamePad {
 	public GamePad(boolean enabled) {
 		this.enabled = enabled;
 		buttons = new Button[4];
-		buttons[UP] = new Button("controls/up.png", 500 ,170);
-		buttons[DOWN] = new Button("controls/down.png",500, 80);
-		buttons[LEFT] = new Button("controls/left.png",420, 120);
-		buttons[RIGHT] = new Button("controls/right.png", 580, 120);
+		buttons[UP] = new Button("GAMEPAD/shadedDark03.png", 500 ,170);
+		buttons[DOWN] = new Button("GAMEPAD/shadedDark10.png",500, 80);
+		buttons[LEFT] = new Button("GAMEPAD/shadedDark05.png",420, 120);
+		buttons[RIGHT] = new Button("GAMEPAD/shadedDark06.png", 580, 120);
 	}
 	
 	public int buttonTouched(float x, float y) {
