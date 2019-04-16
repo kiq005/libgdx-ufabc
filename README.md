@@ -12,3 +12,8 @@ TODO:
 ## Model Manager
 The model manager class manage assets loading and unloading, based on a `.json` config file.
 To use it, create a configuration file on `assets/Configs/AssetsBundles/` with a name reference to the object and the path to the `.g3db` model, then, call `loadBundle` with the config name. The class will load all necessary models and unload anything that is unused.
+
+
+Link Hero:
+
+https://free3d.com/3d-model/momon-636489.html
