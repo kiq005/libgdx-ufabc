@@ -15,6 +15,7 @@ import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.math.Vector3;
 
+import br.edu.ufabc.meuprimeirojogo.core.ModelManager;
 import br.edu.ufabc.meuprimeirojogo.screen.GameScreen;
 import br.edu.ufabc.meuprimeirojogo.screen.MyScreen;
 import br.edu.ufabc.meuprimeirojogo.screen.StartScreen;
@@ -24,28 +25,32 @@ import br.edu.ufabc.meuprimeirojogo.util.Utilities;
 public class MeuJogo extends Game implements InputProcessor {
 
 	private MyScreen currentScreen;
-	public static AssetManager assetManager;
+	public static ModelManager modelManager;
 	public static ModelBuilder modelBuider;
 	public static boolean DEBUG = false;
 	public static GamePad gamePad;
 
 	@Override
 	public void create() {
-		modelBuider = new ModelBuilder();
-		assetManager = new AssetManager();
 		gamePad      = new GamePad(false);
 		Gdx.input.setInputProcessor(this);
+		
+		modelManager = new ModelManager();
+		modelBuider  = new ModelBuilder();
 		
 		// TODO: Change loading scheme to level-based load
 		// - It can be done using a json file to describe what should be loaded (best solution)
 		// - Or separate the folders on things to be always loaded and leve-specific things
-		loadAllFilesInFolder(Gdx.files.internal("./Level/g3db/"));
+		//loadAllFilesInFolder(Gdx.files.internal("./Level/g3db/"));
+		
+		
 		
 		currentScreen = new StartScreen("START");
 		setScreen(currentScreen);
 
 	}
 	
+	/*
 	public void loadAllFilesInFolder(final FileHandle fileHandle) {
 	    for (final FileHandle fileEntry : fileHandle.list()) {
 	        if (fileEntry.isDirectory()) {
@@ -56,6 +61,7 @@ public class MeuJogo extends Game implements InputProcessor {
 	        }
 	    }
 	}
+	*/
 
 	public void render() {
 		currentScreen.render(Gdx.graphics.getDeltaTime());

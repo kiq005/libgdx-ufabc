@@ -15,8 +15,6 @@ import com.badlogic.gdx.math.Matrix4;
 import br.edu.ufabc.meuprimeirojogo.Commands;
 import br.edu.ufabc.meuprimeirojogo.MeuJogo;
 import br.edu.ufabc.meuprimeirojogo.model.AbstractModel;
-import br.edu.ufabc.meuprimeirojogo.model.LixoAndante;
-import br.edu.ufabc.meuprimeirojogo.model.Poste;
 import br.edu.ufabc.meuprimeirojogo.util.Button;
 import br.edu.ufabc.meuprimeirojogo.util.ChasingCamera;
 
@@ -29,7 +27,6 @@ public class Renderer {
 	private ChasingCamera camera;
 	private CameraInputController input;
 	private SpriteBatch spritebatch;
-	private BitmapFont bmp;
 	private Matrix4 viewMatrix;
 	private Matrix4 tranMatrix;
 
@@ -40,14 +37,9 @@ public class Renderer {
 		environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.3f, 0.3f, 0.3f, 0));
 
 		environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -0.2f, -0.8f, 1));
-		for (AbstractModel m : action.objects) {
-			if (m instanceof Poste) {
-				environment.add(((Poste) m).posteLight());
-			}
-		}
 		camera = new ChasingCamera(67.0f, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), 1.5f, -2.5f);
 		camera.far = 300f;
-		// considerando que o lixo está na posição 0
+		// considerando que o lixo estï¿½ na posiï¿½ï¿½o 0
 
 //		camera.position.set(0, 5,5);
 //		camera.lookAt(0,5,10);
@@ -55,11 +47,9 @@ public class Renderer {
 		// input = new CameraInputController(camera);
 		// Gdx.input.setInputProcessor(input);
 		spritebatch = new SpriteBatch();
-		bmp = new BitmapFont(Gdx.files.internal("fonts/myfont.fnt"));
-		bmp.getData().setScale(0.5f);
 		viewMatrix = new Matrix4();
 		tranMatrix = new Matrix4();
-		camera.setObjectToFollow(gameAction.robot.getGameObject());
+		//camera.setObjectToFollow(gameAction.robot.getGameObject());
 	}
 
 	public void draw(float delta) {
@@ -83,7 +73,6 @@ public class Renderer {
 		modelBatch.end();
 		camera.update();
 		spritebatch.begin();
-		bmp.draw(spritebatch, gameAction.strMsg, 50, 450);
 
 		if (MeuJogo.gamePad.enabled)
 			for (Button button : MeuJogo.gamePad.getButtons()) {

@@ -53,9 +53,9 @@ public class StartScreen extends MyScreen {
 	@Override
 	public void update(float delta) {
 
-		if (!MeuJogo.assetManager.isFinished()) {
-			MeuJogo.assetManager.update();
-			progress = (int) (MeuJogo.assetManager.getProgress() * 100);
+		if (!MeuJogo.modelManager.assetManager.isFinished()) {
+			MeuJogo.modelManager.assetManager.update();
+			progress = (int) (MeuJogo.modelManager.assetManager.getProgress() * 100);
 
 		} else {
 			loaded = true;
