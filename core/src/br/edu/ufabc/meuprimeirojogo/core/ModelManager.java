@@ -13,7 +13,11 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g3d.Material;
 import com.badlogic.gdx.graphics.g3d.Model;
+import com.badlogic.gdx.graphics.g3d.attributes.BlendingAttribute;
+import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 
 public class ModelManager {
@@ -30,33 +34,54 @@ public class ModelManager {
 		
 		assets = new HashMap<String, String>();
 		
-		loadBundle("Level1");
+		// TODO: Remove the DEBUG code bellow
+		loadBundle(new String[]{"Level1", "Enemy"});
 	}
 	
-	public void loadBundle(String bundleName) {
-		try (FileReader reader = new FileReader(ASSET_BUNDLES_PATH + bundleName + ".json")) {
-			JSONObject arr = (JSONObject) parser.parse(reader);
-			for(String key : assets.keySet()) {
-				if (!arr.containsKey(key))
-					assetManager.unload(assets.get(key));
-			}
-			for(Object key : arr.keySet()) {
-				if (!assets.containsKey((String)key)) {
-					assets.put((String) key, (String) arr.get(key));
-					assetManager.load(assets.get((String) key), Model.class);
+	@SuppressWarnings("unchecked")
+	public void loadBundle(String[] bundleNames) {
+		JSONObject objects = new JSONObject(); 
+		
+		for(String bundle : bundleNames) {
+			try (FileReader reader = new FileReader(ASSET_BUNDLES_PATH + bundle + ".json")) {
+				JSONObject arr = (JSONObject) parser.parse(reader);
+				for(Object key : arr.keySet())
+				{
+					objects.put(key, arr.get(key));
 				}
+			} catch (FileNotFoundException e) {
+				System.err.println("File not found...");
+			} catch (IOException e) {
+				System.err.println("IOException...");
+			} catch (ParseException e) {
+				System.err.println("ParseException..." + e.getMessage());
 			}
-		} catch (FileNotFoundException e) {
-			System.err.println("File not found...");
-		} catch (IOException e) {
-			System.err.println("IOException...");
-		} catch (ParseException e) {
-			System.err.println("ParseException..." + e.getMessage());
+		}
+		
+		for(String key : assets.keySet()) {
+			if (!objects.containsKey(key))
+				assetManager.unload(assets.get(key));
+		}
+		for(Object key : objects.keySet()) {
+			if (!assets.containsKey((String)key)) {
+				assets.put((String) key, (String) objects.get(key));
+				assetManager.load(assets.get((String) key), Model.class);
+			}
 		}
 	}
 	
 	public GameObject getModel(String name) {
-		return assetManager.get(assets.get(name));
+		GameObject go = assetManager.get(assets.get(name));
+		
+		BlendingAttribute bl = new BlendingAttribute(GL20.GL_SRC_ALPHA | GL20.GL_ONE_MINUS_SRC_ALPHA);
+		bl.opacity = 1f;
+		
+		for(Material mat : go.materials) {
+			mat.remove(ColorAttribute.Emissive);
+			mat.set(bl);
+		}
+		
+		return go;
 	}
 	
 }
