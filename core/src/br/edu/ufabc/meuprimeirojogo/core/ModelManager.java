@@ -53,8 +53,10 @@ public class ModelManager {
 		} catch (ParseException e) {
 			System.err.println("ParseException..." + e.getMessage());
 		}
-		
 	}
 	
+	public GameObject getModel(String name) {
+		return assetManager.get(assets.get(name));
+	}
 	
 }
