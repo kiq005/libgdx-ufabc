@@ -33,9 +33,6 @@ public class ModelManager {
 		parser = new JSONParser();
 		
 		assets = new HashMap<String, String>();
-		
-		// TODO: Remove the DEBUG code bellow
-		loadBundle(new String[]{"Level1", "Enemy"});
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -50,9 +47,9 @@ public class ModelManager {
 					objects.put(key, arr.get(key));
 				}
 			} catch (FileNotFoundException e) {
-				System.err.println("File not found...");
+				System.err.println("File not found..." + e.getMessage());
 			} catch (IOException e) {
-				System.err.println("IOException...");
+				System.err.println("IOException..." + e.getMessage());
 			} catch (ParseException e) {
 				System.err.println("ParseException..." + e.getMessage());
 			}
@@ -70,8 +67,8 @@ public class ModelManager {
 		}
 	}
 	
-	public GameObject getModel(String name) {
-		GameObject go = assetManager.get(assets.get(name));
+	public Model getModel(String name) {
+		Model go = assetManager.get(assets.get(name));
 		
 		BlendingAttribute bl = new BlendingAttribute(GL20.GL_SRC_ALPHA | GL20.GL_ONE_MINUS_SRC_ALPHA);
 		bl.opacity = 1f;

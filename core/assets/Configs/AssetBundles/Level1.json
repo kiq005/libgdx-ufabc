@@ -1,4 +1,5 @@
 {
   "grass":"./Level/g3db/grass.g3db",
-  "ground":"./Level/g3db/ground_dirt.g3db"
+  "ground":"./Level/g3db/ground_dirt.g3db",
+  "cliff":"./Level/g3db/cliffGrey_block.g3db"
 }

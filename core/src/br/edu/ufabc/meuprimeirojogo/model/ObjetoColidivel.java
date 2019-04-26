@@ -10,6 +10,11 @@ public class ObjetoColidivel extends AbstractModel{
 		super(true, false);
 		currentObject = new GameObject(model);
 	}
+	
+	public ObjetoColidivel(GameObject go) {
+		super(true, false);
+		currentObject = go;
+	}
 
 	@Override
 	public void update(float delta) {

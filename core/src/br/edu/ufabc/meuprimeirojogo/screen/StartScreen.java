@@ -28,7 +28,7 @@ public class StartScreen extends MyScreen {
 	private boolean stringDone = false;
 	private Music sounds;
 
-	public StartScreen(String id) {
+	public StartScreen(String id, String[] bundlesToLoad) {
 		super(id);
 		texture = new Texture("start.jpg");
 		spriteBatch = new SpriteBatch();
@@ -39,7 +39,7 @@ public class StartScreen extends MyScreen {
 		sounds.setLooping(true);
 		//sounds.play();
 		
-
+		MeuJogo.modelManager.loadBundle(bundlesToLoad);
 	}
 
 	@Override

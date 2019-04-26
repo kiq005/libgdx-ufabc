@@ -16,6 +16,7 @@ import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.math.Vector3;
 
 import br.edu.ufabc.meuprimeirojogo.core.ModelManager;
+import br.edu.ufabc.meuprimeirojogo.screen.Dungeon;
 import br.edu.ufabc.meuprimeirojogo.screen.GameScreen;
 import br.edu.ufabc.meuprimeirojogo.screen.MyScreen;
 import br.edu.ufabc.meuprimeirojogo.screen.StartScreen;
@@ -38,39 +39,18 @@ public class MeuJogo extends Game implements InputProcessor {
 		modelManager = new ModelManager();
 		modelBuider  = new ModelBuilder();
 		
-		// TODO: Change loading scheme to level-based load
-		// - It can be done using a json file to describe what should be loaded (best solution)
-		// - Or separate the folders on things to be always loaded and leve-specific things
-		//loadAllFilesInFolder(Gdx.files.internal("./Level/g3db/"));
-		
-		
-		
-		currentScreen = new StartScreen("START");
+		currentScreen = new StartScreen("LOADING", new String[] {"Level1"});
 		setScreen(currentScreen);
-
 	}
-	
-	/*
-	public void loadAllFilesInFolder(final FileHandle fileHandle) {
-	    for (final FileHandle fileEntry : fileHandle.list()) {
-	        if (fileEntry.isDirectory()) {
-	        	loadAllFilesInFolder(fileEntry);
-	        } else {
-	        	if(fileEntry.extension().equals("g3db"))
-	        		assetManager.load(fileEntry.path(), Model.class);
-	        }
-	    }
-	}
-	*/
 
 	public void render() {
 		currentScreen.render(Gdx.graphics.getDeltaTime());
 		if (currentScreen.isDone()) {
 			// aqui eu cuido da transição das telas
-			if (currentScreen.getId().equals("START")) {
-				currentScreen = new GameScreen("GAME");
+			if (currentScreen.getId().equals("LOADING")) {
+				currentScreen = new Dungeon("DUNGEON");
 			} else {
-				currentScreen = new StartScreen("START");
+				currentScreen = new StartScreen("LOADING", new String[] {"Level1"});
 			}
 
 		}
