@@ -1,11 +1,14 @@
 package br.edu.ufabc.meuprimeirojogo.util;
 
+import java.util.Random;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector3;
 
 public class Utilities {
 	public static final int GAME_WIDTH  = 800;
 	public static final int GAME_HEIGHT = 600;
+	public static final Random random = new Random();
 	
 	public static Vector3 convertCoordinates(float x, float y) {
 		Vector3 pos = new Vector3();
@@ -19,4 +22,7 @@ public class Utilities {
 		return (float)Math.toDegrees(Math.atan((pos1.x-pos2.x)/(pos1.z-pos2.z)));
 	}
 
+	public static int getRandomNumberInRange(int min, int max) {
+		return random.nextInt((max - min) + 1) + min;
+	}
 }

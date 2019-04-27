@@ -1,5 +1,8 @@
 {
   "grass":"./Level/g3db/grass.g3db",
   "ground":"./Level/g3db/ground_dirt.g3db",
-  "cliff":"./Level/g3db/cliffGrey_block.g3db"
+  "cliff_wall":"./Level/g3db/cliffGrey_top.g3db",
+  "cliff":"./Level/g3db/cliffGrey_block.g3db",
+  "cliff_corner_inner":"./Level/g3db/cliffGrey_cornerInnerTop.g3db",
+  "cliff_corner_outer":"./Level/g3db/cliffGrey_cornerTop.g3db"
 }

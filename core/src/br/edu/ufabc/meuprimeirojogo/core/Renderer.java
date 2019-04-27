@@ -38,7 +38,7 @@ public class Renderer {
 
 		environment.add(new DirectionalLight().set(0.8f, 0.8f, 0.8f, -0.2f, -0.8f, 1));
 		camera = new ChasingCamera(67.0f, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), 1.5f, -2.5f);
-		camera.far = 300f;
+		camera.far = 100f;
 		// considerando que o lixo est� na posi��o 0
 
 //		camera.position.set(0, 5,5);

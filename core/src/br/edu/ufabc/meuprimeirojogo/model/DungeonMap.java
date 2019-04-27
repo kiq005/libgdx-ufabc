@@ -15,6 +15,25 @@ public class DungeonMap {
 	ObjetoColidivel tiles[][];
 	int width;
 	int height;
+	
+	private static final int GROUND = 0;
+	
+	private static final int N_WALL = 2;
+	private static final int S_WALL = 3;
+	private static final int E_WALL = 4;
+	private static final int W_WALL = 5;
+	
+	private static final int NW_WALL = 6;
+	private static final int NE_WALL = 7;
+	private static final int SW_WALL = 8;
+	private static final int SE_WALL = 9;
+	
+	private static final int NW_WALL_CORNER = 10;
+	private static final int NE_WALL_CORNER = 11;
+	private static final int SW_WALL_CORNER = 12;
+	private static final int SE_WALL_CORNER = 13;
+	
+	private static final int SINGLE_WALL = 1;
 
 	public DungeonMap(int width, int height) {
 		tiles = new ObjetoColidivel[width][height];
@@ -22,19 +41,54 @@ public class DungeonMap {
 		this.height = height;
 		
 		int[][] map = GenerateMaze(width, height);
+		AdjustTiles(map);
 		
 		for(int x = 0; x < width; ++x) {
 			for(int y = 0; y < height; ++y) {
+				
 				String model_name = "ground";
 				switch(map[x][y]) {
-				case 0:
+				case GROUND:
 					model_name = "ground";
 					break;
-				case 1:
+				case SINGLE_WALL:
 					model_name = "cliff";
 					break;
-				case 2:
-					model_name = "ground";
+				case N_WALL:
+					model_name = "cliff_wall";
+					break;
+				case S_WALL:
+					model_name = "cliff_wall";
+					break;
+				case W_WALL:
+					model_name = "cliff_wall";
+					break;
+				case E_WALL:
+					model_name = "cliff_wall";
+					break;
+				case NE_WALL:
+					model_name = "cliff_corner_inner";
+					break;
+				case NW_WALL:
+					model_name = "cliff_corner_inner";
+					break;
+				case SE_WALL:
+					model_name = "cliff_corner_inner";
+					break;
+				case SW_WALL:
+					model_name = "cliff_corner_inner";
+					break;
+				case NW_WALL_CORNER:
+					model_name = "cliff_corner_outer";
+					break;
+				case NE_WALL_CORNER:
+					model_name = "cliff_corner_outer";
+					break;
+				case SW_WALL_CORNER:
+					model_name = "cliff_corner_outer";
+					break;
+				case SE_WALL_CORNER:
+					model_name = "cliff_corner_outer";
 					break;
 				default:
 					model_name = "ground";
@@ -45,25 +99,117 @@ public class DungeonMap {
 				
 				tiles[x][y] = new ObjetoColidivel(go);
 				tiles[x][y].getGameObject().transform.setToTranslation(new Vector3(x * 10, 0, y * 10));
+				
+				switch(map[x][y]) {
+				case GROUND:
+					break;
+				case SINGLE_WALL:
+					break;
+				case N_WALL:
+					tiles[x][y].getGameObject().transform.rotate(Vector3.Y, 180);
+					break;
+				case S_WALL:
+					break;
+				case W_WALL:
+					tiles[x][y].getGameObject().transform.rotate(Vector3.Y, -90);
+					break;
+				case E_WALL:
+					tiles[x][y].getGameObject().transform.rotate(Vector3.Y, 90);
+					break;
+				case NE_WALL:
+					tiles[x][y].getGameObject().transform.rotate(Vector3.Y, 180);
+					break;
+				case NW_WALL:
+					tiles[x][y].getGameObject().transform.rotate(Vector3.Y, -90);
+					break;
+				case SE_WALL:
+					tiles[x][y].getGameObject().transform.rotate(Vector3.Y, 90);
+					break;
+				case SW_WALL:
+					break;
+				case NW_WALL_CORNER:
+					break;
+				case NE_WALL_CORNER:
+					break;
+				case SW_WALL_CORNER:
+					break;
+				case SE_WALL_CORNER:
+					break;
+				}
 			}
 		}
 		
 		System.out.println("MAP CREATED");
 	}
 	
-	public int[][] GenerateMaze(int width, int height){
-		MazeGenerator mg = new MazeGenerator(width, height);
-		int[][] map = mg.GetMaze();
-		
+	public void AdjustTiles(int[][] map){
 		for(int x = 0; x < width; ++x) {
 			for(int y = 0; y < height; ++y) {
-				if( x==0 || x == width-1 || y==0 || y==height-1) {
-					map[x][y] = 1;
+				if(x==0) {
+					if(y==0) {
+						map[x][y] = NW_WALL;
+					}
+					else if(y==height-1) {
+						map[x][y] = SW_WALL;
+					}
+					else {
+						map[x][y] = W_WALL;
+					}
+				}
+				else if(x==width-1) {
+					if(y==0) {
+						map[x][y] = NE_WALL;
+					}
+					else if(y==height-1) {
+						map[x][y] = SE_WALL;
+					}
+					else {
+						map[x][y] = E_WALL;
+					}
+				}
+				else {
+					if(y==0) {
+						map[x][y] = N_WALL;
+					}
+					else if(y==height-1) {
+						map[x][y] = S_WALL;
+					}
+					else {
+						
+					}
 				}
 			}
 		}
+	}
+	
+	public int[][] GenerateMaze(int width, int height){
+		MazeGenerator mg = new MazeGenerator(width, height);
+		int[][] map = mg.GetMaze();
+		int[][] mapFinal = new int[width][height];
+		int neighbours;
 		
-		return map;
+		for(int x = 0; x < width; ++x) {
+			for(int y = 0; y < height; ++y) {
+				mapFinal[x][y] = 1-map[x][y];
+				neighbours = 0;
+				
+				if(x>0 && x<width-1 && y > 0 && y < height-1) {
+					neighbours += map[x-1][y-1] + map[x][y-1] + map[x+1][y-1];
+					neighbours += map[x-1][y] + map[x+1][y-1];
+					neighbours += map[x-1][y+1] + map[x][y+1] + map[x+1][y+1];
+				}
+				
+				if (neighbours < 3)
+					mapFinal[x][y] = 0;
+				
+				if( x==0 || x == width-1 || y==0 || y==height-1) {
+					mapFinal[x][y] = 1;
+				}
+				
+			}
+		}
+		
+		return mapFinal;
 	}
 	
 	public int[][] GenerateMap(int width, int height){
