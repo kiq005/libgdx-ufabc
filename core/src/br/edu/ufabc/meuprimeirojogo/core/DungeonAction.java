@@ -18,6 +18,7 @@ public class DungeonAction {
 		
 		objects = new Array<AbstractModel>();
 		
+		/*
 		Hero hero = new Hero(30, 200);
 		hero.setPosition(40, 2.55f, 40);
 		
@@ -29,6 +30,7 @@ public class DungeonAction {
 		
 		enemy.getGameObject().transform.scale(0.03f, 0.03f, 0.03f);
 		hero.getGameObject().transform.scale(0.03f, 0.03f, 0.03f);
+		*/
 		
 		map.AddToObjectList(objects);
 		

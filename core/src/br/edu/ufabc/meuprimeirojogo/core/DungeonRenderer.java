@@ -15,6 +15,7 @@ import br.edu.ufabc.meuprimeirojogo.MeuJogo;
 import br.edu.ufabc.meuprimeirojogo.model.AbstractModel;
 import br.edu.ufabc.meuprimeirojogo.util.Button;
 import br.edu.ufabc.meuprimeirojogo.util.ChasingCamera;
+import br.edu.ufabc.meuprimeirojogo.util.Utilities;
 
 public class DungeonRenderer {
 	private DungeonAction gameAction;
@@ -26,9 +27,14 @@ public class DungeonRenderer {
 	private SpriteBatch spritebatch;
 	private Matrix4 viewMatrix;
 	private Matrix4 tranMatrix;
+	
+	private HUD hud;
 
 	public DungeonRenderer(DungeonAction action) {
 		this.gameAction = action;
+		
+		hud = new HUD();
+		
 		modelBatch = new ModelBatch();
 		environment = new Environment();
 		environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.3f, 0.3f, 0.3f, 0));
@@ -52,7 +58,7 @@ public class DungeonRenderer {
 		Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		Gdx.gl.glClearColor(0, 0, 0, 0);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
-		viewMatrix.setToOrtho2D(0, 0, 800, 600);
+		viewMatrix.setToOrtho2D(0, 0, Utilities.GAME_WIDTH, Utilities.GAME_HEIGHT);
 		spritebatch.setProjectionMatrix(viewMatrix);
 		spritebatch.setTransformMatrix(tranMatrix);
 
@@ -70,10 +76,15 @@ public class DungeonRenderer {
 		camera.update();
 		spritebatch.begin();
 
+		hud.draw(spritebatch);
+		
 		if (MeuJogo.gamePad.enabled)
 			for (Button button : MeuJogo.gamePad.getButtons()) {
 				spritebatch.draw(button.getTexture(), button.getPosX(), button.getPosY());
 			}
+		
+		
+		
 		spritebatch.end();
 	}
 }
