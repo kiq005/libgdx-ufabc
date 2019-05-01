@@ -18,12 +18,12 @@ public class DungeonAction {
 		
 		objects = new Array<AbstractModel>();
 		
-		Vector3 heroInitialPosition = new Vector3(40, 2.55f, 40);
-		Vector3 enemyInitialPosition = new Vector3(20, 2.55f, 20);
+		Hero hero = new Hero(30, 200);
+		hero.setPosition(40, 2.55f, 40);
 		
-		Hero hero = new Hero(30, 200, heroInitialPosition);
-		Enemy enemy = new Enemy(100, 3, 20, 100, enemyInitialPosition, hero);
-		
+		Enemy enemy = new Enemy(100, 3, 20, 100, hero);
+		enemy.setPosition(20, 2.55f, 20);
+				
 		objects.add(hero);
 		objects.add(enemy);
 		

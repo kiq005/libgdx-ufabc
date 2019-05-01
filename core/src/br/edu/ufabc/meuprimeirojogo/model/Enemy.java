@@ -22,8 +22,8 @@ public class Enemy extends AbstractCharacter {
 	private float visionBigRadius;
 	private float visionSmallRadius;
 	
- 	public Enemy(float visionBigRadius, float visionSmallRadius, float strength, float healthPoints, Vector3 initialPosition, Hero hero) {
- 		super(collidable, moveable, strength, healthPoints, initialPosition);
+ 	public Enemy(float visionBigRadius, float visionSmallRadius, float strength, float healthPoints, Hero hero) {
+ 		super(collidable, moveable, strength, healthPoints);
 		state = IDLE;
 		this.visionBigRadius = visionBigRadius;
 		this.visionSmallRadius = visionSmallRadius;
@@ -103,7 +103,6 @@ public class Enemy extends AbstractCharacter {
 			}
 		}
 	}
- 	
  	
 	public float getHeroDistance() {
 		return hero.getPosition().dst(this.getPosition());

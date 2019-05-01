@@ -13,16 +13,14 @@ public abstract class AbstractCharacter extends AbstractModel {
 	private float strength = 20;
 	private float healthPoints = 100;
 	
-	public AbstractCharacter(boolean collidable, boolean moveable, Vector3 initialPosition) {
+	public AbstractCharacter(boolean collidable, boolean moveable) {
 		super(collidable, moveable);
-		this.setPosition(initialPosition.x, initialPosition.y, initialPosition.z);
 	}
 		
-	public AbstractCharacter(boolean collidable, boolean moveable, float customStrength, float customHealthPoints, Vector3 initialPosition) {
+	public AbstractCharacter(boolean collidable, boolean moveable, float customStrength, float customHealthPoints) {
 		super(collidable, moveable);
 		this.strength = customStrength;
 		this.healthPoints = customHealthPoints;
-		this.setPosition(initialPosition.x, initialPosition.y, initialPosition.z);
 	}
 	
 	public float getHealthPoints() {
