@@ -14,7 +14,7 @@ public class Enemy extends AbstractCharacter {
 	
 	public static final int IDLE = 0;
 	public static final int RUNNING = 1;
-	public static final int PUNCHING = 2;
+	public static final int ATTACKING = 2;
 	public static final int DYING = 3;
 	public static final int DEAD = 4;
 	
@@ -60,7 +60,7 @@ public class Enemy extends AbstractCharacter {
 		characters = new GameObject[4];
 		characters[IDLE] = new GameObject(modelIdle, true, true, true, 1.0f);
 		characters[RUNNING] = new GameObject(modelWalk, true, true, true, 1.0f);
-		characters[PUNCHING] = new GameObject(modelShot, true, true, true, 1.0f);
+		characters[ATTACKING] = new GameObject(modelShot, true, true, true, 1.0f);
 		characters[DYING] = new GameObject(modelDying, true, true, false, 1.0f);
 	}
  	
@@ -68,8 +68,8 @@ public class Enemy extends AbstractCharacter {
  		state = RUNNING;
  	}
  	
- 	private void punch() {
-		state = PUNCHING;
+ 	private void attack() {
+		state = ATTACKING;
 	}
 
  	private void idle() {
@@ -101,14 +101,14 @@ public class Enemy extends AbstractCharacter {
 				if (heroDistance > this.visionBigRadius) 
 					idle();
 				else if (heroDistance <= this.visionSmallRadius) 
-					punch();			
+					attack();			
 				else {
 					Vector3 enemyPosition = this.getPosition();
 					enemyPosition.interpolate(hero.getPosition(), 0.1f, Interpolation.linear);
 					this.getGameObject().transform.setTranslation(enemyPosition);
 				}
 				break;
-			case PUNCHING:
+			case ATTACKING:
 				if (this.getGameObject().isAnimationFinished()) {
 					if (heroDistance <= this.visionSmallRadius)
 						hero.applyDamage(this.getStrength());
