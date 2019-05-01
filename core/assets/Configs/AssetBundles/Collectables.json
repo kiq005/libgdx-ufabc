@@ -1,4 +1,4 @@
 {
-	"uncollectedPotion": "./Level/g3db/bottle.g3db",
-	"collectedPotion": "./Level/g3db/bottleLarge.g3db"
+    "uncollectedPotion": "./Level/g3db/bottle.g3db",
+    "collectedPotion": "./Level/g3db/bottleLarge.g3db"
 }
