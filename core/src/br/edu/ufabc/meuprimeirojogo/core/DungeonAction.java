@@ -2,10 +2,12 @@ package br.edu.ufabc.meuprimeirojogo.core;
 
 import com.badlogic.gdx.graphics.g3d.Material;
 import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import br.edu.ufabc.meuprimeirojogo.model.AbstractModel;
 import br.edu.ufabc.meuprimeirojogo.model.DungeonMap;
 import br.edu.ufabc.meuprimeirojogo.model.Enemy;
+import br.edu.ufabc.meuprimeirojogo.model.Hero;
 
 public class DungeonAction {
 
@@ -16,11 +18,17 @@ public class DungeonAction {
 		
 		objects = new Array<AbstractModel>();
 		
-		Enemy enemy = new Enemy();
+		Vector3 heroInitialPosition = new Vector3(40, 2.55f, 40);
+		Vector3 enemyInitialPosition = new Vector3(20, 2.55f, 20);
+		
+		Hero hero = new Hero(30, 200, heroInitialPosition);
+		Enemy enemy = new Enemy(100, 3, 20, 100, enemyInitialPosition, hero);
+		
+		objects.add(hero);
 		objects.add(enemy);
-		enemy.setInitialPosition(20, 2.55f, 20);
-		//enemy.getGameObject().transform.setToTranslation(-50, 0, -50);
+		
 		enemy.getGameObject().transform.scale(0.03f, 0.03f, 0.03f);
+		hero.getGameObject().transform.scale(0.03f, 0.03f, 0.03f);
 		
 		map.AddToObjectList(objects);
 		

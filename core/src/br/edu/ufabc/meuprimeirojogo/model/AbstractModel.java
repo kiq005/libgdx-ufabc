@@ -5,7 +5,6 @@ import br.edu.ufabc.meuprimeirojogo.core.GameObject;
 public abstract class AbstractModel {
 	private boolean collidable;
 	private boolean moveable;
-	private float healthPoints;
 	
 	public AbstractModel(boolean collidable, boolean moveable) {
 		this.collidable = collidable;
@@ -33,19 +32,6 @@ public abstract class AbstractModel {
 				   .getBoundingBox()
 				   .intersects(other.getGameObject()
 						            .getBoundingBox());
-	}
-	
-	public float getHealthPoints() {
-		return healthPoints;
-	}
-	
-	public void setHealthPoints(float healthPoints) {
-		this.healthPoints = healthPoints;
-	}
-	
-
-	public void applyDamage(float damageAmount) {
-		this.healthPoints -= damageAmount; 
 	}
 	
 	public abstract void update(float delta);

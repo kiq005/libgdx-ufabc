@@ -1,6 +1,6 @@
 {
-  "idle": "./Actors/enemy/idle.g3db",
-  "running": "./Actors/enemy/running.g3db",
-  "punching": "./Actors/enemy/punching.g3db",
-  "dying": "./Actors/enemy/dying.g3db"
+  "enemyIdle": "./Actors/enemy/idle.g3db",
+  "enemyRunning": "./Actors/enemy/running.g3db",
+  "enemyPunching": "./Actors/enemy/punching.g3db",
+  "enemyDying": "./Actors/enemy/dying.g3db"
 }
