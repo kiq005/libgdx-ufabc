@@ -1,8 +1,10 @@
 package br.edu.ufabc.meuprimeirojogo.model;
 
+import java.util.HashMap;
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Vector3;
+
 import br.edu.ufabc.meuprimeirojogo.MeuJogo;
 import br.edu.ufabc.meuprimeirojogo.core.GameObject;
 
@@ -15,14 +17,28 @@ public class Enemy extends AbstractCharacter {
 	public static final int PUNCHING = 2;
 	public static final int DYING = 3;
 	public static final int DEAD = 4;
-
+	
+	public static final int MUTANT = 0;
+	public static final int NIGHTSHADE = 1;
+	public static final int SKELETONZOMBIE = 2;
+	
 	private static boolean collidable = true;
 	private static boolean moveable = true;
 	private Hero hero;
 	private float visionBigRadius;
 	private float visionSmallRadius;
 	
- 	public Enemy(float visionBigRadius, float visionSmallRadius, float strength, float healthPoints, Hero hero) {
+	public static HashMap<Integer, String> enemyMap;
+	static {
+		enemyMap = new HashMap<Integer, String>();
+		enemyMap.put(MUTANT, "mutant");
+		enemyMap.put(NIGHTSHADE, "nightshade");
+		enemyMap.put(SKELETONZOMBIE, "skeletonzombie");
+	}
+	
+	HashMap<String, String> enemyTypes = new HashMap<String, String>();
+	
+ 	public Enemy(float visionBigRadius, float visionSmallRadius, float strength, float healthPoints, int enemyType, Hero hero) {
  		super(collidable, moveable, strength, healthPoints);
 		state = IDLE;
 		this.visionBigRadius = visionBigRadius;
@@ -31,11 +47,16 @@ public class Enemy extends AbstractCharacter {
 		this.setHealthPoints(healthPoints);
 		this.hero = hero;
 		
-		Model modelIdle = MeuJogo.modelManager.getModel("enemyIdle");
-		Model modelWalk = MeuJogo.modelManager.getModel("enemyRunning");
-		Model modelShot = MeuJogo.modelManager.getModel("enemyPunching");
-		Model modelDying = MeuJogo.modelManager.getModel("enemyDying");
-
+		// just making sure that the user won't screw the game by providing an invalid enemy type
+		if (enemyType < 0 || enemyType > 2) {
+			enemyType = 0;
+		}
+		
+		Model modelIdle = MeuJogo.modelManager.getModel(enemyMap.get(enemyType) + "Idle");
+		Model modelWalk = MeuJogo.modelManager.getModel(enemyMap.get(enemyType) + "Running");
+		Model modelShot = MeuJogo.modelManager.getModel(enemyMap.get(enemyType) + "Attacking");
+		Model modelDying = MeuJogo.modelManager.getModel(enemyMap.get(enemyType) + "Dying");
+		
 		characters = new GameObject[4];
 		characters[IDLE] = new GameObject(modelIdle, true, true, true, 1.0f);
 		characters[RUNNING] = new GameObject(modelWalk, true, true, true, 1.0f);

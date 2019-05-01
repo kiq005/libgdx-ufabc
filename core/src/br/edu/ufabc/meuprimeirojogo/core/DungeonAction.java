@@ -21,7 +21,7 @@ public class DungeonAction {
 		Hero hero = new Hero(30, 200);
 		hero.setPosition(40, 2.55f, 40);
 		
-		Enemy enemy = new Enemy(100, 3, 20, 100, hero);
+		Enemy enemy = new Enemy(100, 3, 20, 100, Enemy.MUTANT, hero);
 		enemy.setPosition(20, 2.55f, 20);
 				
 		objects.add(hero);
