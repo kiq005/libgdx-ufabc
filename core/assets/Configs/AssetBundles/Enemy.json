@@ -1,0 +1,6 @@
+{
+  "enemyIdle": "./Actors/enemy/idle.g3db",
+  "enemyRunning": "./Actors/enemy/running.g3db",
+  "enemyPunching": "./Actors/enemy/punching.g3db",
+  "enemyDying": "./Actors/enemy/dying.g3db"
+}
