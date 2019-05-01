@@ -85,7 +85,6 @@ public class Enemy extends AbstractCharacter {
 	}
 
  	public void update(float delta) {
- 		characters[state].update(delta);
 		float heroDistance = this.getHeroDistance();
 		
 		if (this.getHealthPoints() <= 0) {
@@ -123,6 +122,8 @@ public class Enemy extends AbstractCharacter {
 				break;
 			}
 		}
+		
+		characters[state].update(delta);
 	}
  	
 	public float getHeroDistance() {
