@@ -44,13 +44,13 @@ public class Potion extends AbstractCollectable {
 
 	@Override
 	public void update(float delta) {
-		collectables[state].update(delta);
 		float heroDistance = this.getHeroDistance();
 		
 		if (this.state == UNCOLLECTED && heroDistance < 2) {
 			applyCollectableEffect();
 			collect();
 		}
+		collectables[state].update(delta);
 	}
 	
 	public float getHeroDistance() {
