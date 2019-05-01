@@ -12,7 +12,10 @@ import br.edu.ufabc.meuprimeirojogo.core.MazeGenerator;
 
 public class DungeonMap {
 	
-	ObjetoColidivel tiles[][];
+	ObjetoColidivel ground[][];
+	ObjetoColidivel walls[][];
+	ObjetoColidivel objects[][];
+	
 	int width;
 	int height;
 	
@@ -36,7 +39,9 @@ public class DungeonMap {
 	private static final int SINGLE_WALL = 1;
 
 	public DungeonMap(int width, int height) {
-		tiles = new ObjetoColidivel[width][height];
+		ground = new ObjetoColidivel[width][height];
+		walls = new ObjetoColidivel[width][height];
+		objects = new ObjetoColidivel[width][height];
 		this.width = width;
 		this.height = height;
 		
@@ -45,6 +50,8 @@ public class DungeonMap {
 		
 		for(int x = 0; x < width; ++x) {
 			for(int y = 0; y < height; ++y) {
+				ground[x][y] = new ObjetoColidivel(MeuJogo.modelManager.getModel("ground"));
+				ground[x][y].getGameObject().transform.setToTranslation(new Vector3(x * 10, 0, y * 10));
 				
 				String model_name = "ground";
 				switch(map[x][y]) {
@@ -52,43 +59,43 @@ public class DungeonMap {
 					model_name = "ground";
 					break;
 				case SINGLE_WALL:
-					model_name = "cliff";
+					model_name = "box";
 					break;
 				case N_WALL:
-					model_name = "cliff_wall";
+					model_name = "wall";
 					break;
 				case S_WALL:
-					model_name = "cliff_wall";
+					model_name = "wall";
 					break;
 				case W_WALL:
-					model_name = "cliff_wall";
+					model_name = "wall";
 					break;
 				case E_WALL:
-					model_name = "cliff_wall";
+					model_name = "wall";
 					break;
 				case NE_WALL:
-					model_name = "cliff_corner_inner";
+					model_name = "corner_inner";
 					break;
 				case NW_WALL:
-					model_name = "cliff_corner_inner";
+					model_name = "corner_inner";
 					break;
 				case SE_WALL:
-					model_name = "cliff_corner_inner";
+					model_name = "corner_inner";
 					break;
 				case SW_WALL:
-					model_name = "cliff_corner_inner";
+					model_name = "corner_inner";
 					break;
 				case NW_WALL_CORNER:
-					model_name = "cliff_corner_outer";
+					model_name = "corner_outer";
 					break;
 				case NE_WALL_CORNER:
-					model_name = "cliff_corner_outer";
+					model_name = "corner_outer";
 					break;
 				case SW_WALL_CORNER:
-					model_name = "cliff_corner_outer";
+					model_name = "corner_outer";
 					break;
 				case SE_WALL_CORNER:
-					model_name = "cliff_corner_outer";
+					model_name = "corner_outer";
 					break;
 				default:
 					model_name = "ground";
@@ -97,33 +104,37 @@ public class DungeonMap {
 				
 				Model go = MeuJogo.modelManager.getModel(model_name);
 				
-				tiles[x][y] = new ObjetoColidivel(go);
-				tiles[x][y].getGameObject().transform.setToTranslation(new Vector3(x * 10, 0, y * 10));
+				walls[x][y] = new ObjetoColidivel(go);
+				walls[x][y].getGameObject().transform.setToTranslation(new Vector3(x * 10, 0, y * 10));
 				
 				switch(map[x][y]) {
 				case GROUND:
+					AddObject(x, y);
 					break;
 				case SINGLE_WALL:
 					break;
 				case N_WALL:
-					tiles[x][y].getGameObject().transform.rotate(Vector3.Y, 180);
+					walls[x][y].getGameObject().transform.rotate(Vector3.Y, 180);
+					//tiles[x][y].getGameObject().transform.translate(-10, 0, 0);
 					break;
 				case S_WALL:
+					//tiles[x][y].getGameObject().transform.translate(0, 0, -10);
 					break;
 				case W_WALL:
-					tiles[x][y].getGameObject().transform.rotate(Vector3.Y, -90);
+					walls[x][y].getGameObject().transform.rotate(Vector3.Y, -90);
+					//tiles[x][y].getGameObject().transform.translate(-10, 0, -10);
 					break;
 				case E_WALL:
-					tiles[x][y].getGameObject().transform.rotate(Vector3.Y, 90);
+					walls[x][y].getGameObject().transform.rotate(Vector3.Y, 90);
 					break;
 				case NE_WALL:
-					tiles[x][y].getGameObject().transform.rotate(Vector3.Y, 180);
+					walls[x][y].getGameObject().transform.rotate(Vector3.Y, 180);
 					break;
 				case NW_WALL:
-					tiles[x][y].getGameObject().transform.rotate(Vector3.Y, -90);
+					walls[x][y].getGameObject().transform.rotate(Vector3.Y, -90);
 					break;
 				case SE_WALL:
-					tiles[x][y].getGameObject().transform.rotate(Vector3.Y, 90);
+					walls[x][y].getGameObject().transform.rotate(Vector3.Y, 90);
 					break;
 				case SW_WALL:
 					break;
@@ -232,11 +243,16 @@ public class DungeonMap {
 	public void AddToObjectList(Array<AbstractModel> objects) {
 		for(int x = 0; x < width; ++x) {
 			for(int y = 0; y < height; ++y) {
-				objects.add(tiles[x][y]);
+				objects.add(ground[x][y]);
+				if(walls[x][y] != null) objects.add(walls[x][y]);
+				if(this.objects[x][y] != null) objects.add(this.objects[x][y]);
 			}
 		}
 	}
 	
+	private void AddObject(int x, int y) {
+		
+	}
 	
 	
 }

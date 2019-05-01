@@ -1,0 +1,15 @@
+{
+  "ground":"./Level/g3db/ground_dirt.g3db",
+  "wall":"./Level/g3db/roadTile_020.g3db",
+  "box":"./Level/g3db/roadTile_020.g3db",
+  "corner_inner":"./Level/g3db/roadTile_020.g3db",
+  "corner_outer":"./Level/g3db/roadTile_020.g3db",
+  "obj_s_low_1":"./Level/g3db/arrows.g3db",
+  "obj_s_low_2":"./Level/g3db/campfireStones_rocks.g3db",
+  "obj_low_1":"./Level/g3db/Fallen_Trunk_01.g3db",
+  "obj_low_2":"./Level/g3db/logs_stackLarge.g3db",
+  "obj_low_3":"./Level/g3db/naturePack_076.g3db",
+  "obj_medium_1":"./Level/g3db/naturePack_080.g3db",
+  "obj_medium_2":"./Level/g3db/grass_dense.g3db",
+  "obj_high":"./Level/g3db/grass.g3db"
+}

@@ -1,0 +1,15 @@
+{
+  "ground":"./Level/g3db/ground_dirt.g3db",
+  "wall":"./Level/g3db/wall.g3db",
+  "box":"./Level/g3db/towerSquareMid.g3db",
+  "corner_inner":"./Level/g3db/wallCorner.g3db",
+  "corner_outer":"./Level/g3db/wallCorner.g3db",
+  "obj_s_low_1":"./Level/g3db/cannonMobile.g3db",
+  "obj_s_low_2":"./Level/g3db/tower.g3db",
+  "obj_low_1":"./Level/g3db/naturePack_076.g3db",
+  "obj_low_2":"./Level/g3db/chest.g3db",
+  "obj_low_3":"./Level/g3db/tent_smallOpen.g3db",
+  "obj_medium_1":"./Level/g3db/crateStrong.g3db",
+  "obj_medium_2":"./Level/g3db/barrel.g3db",
+  "obj_high":"./Level/g3db/debris.g3db"
+}

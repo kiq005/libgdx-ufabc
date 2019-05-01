@@ -1,0 +1,16 @@
+{
+  "ground":"./Level/g3db/ground_dirt.g3db",
+  "wall":"./Level/g3db/cliffGrey_top.g3db",
+  "box":"./Level/g3db/cliffGrey_block.g3db",
+  "single":"./Level/g3db/rock_tall1.g3db",
+  "corner_inner":"./Level/g3db/cliffGrey_cornerInnerTop.g3db",
+  "corner_outer":"./Level/g3db/cliffGrey_cornerTop.g3db",
+  "obj_s_low_1":"./Level/g3db/rock_tall8.g3db",
+  "obj_s_low_2":"./Level/g3db/shovelDirt.g3db",
+  "obj_low_1":"./Level/g3db/formation_stone.g3db",
+  "obj_low_2":"./Level/g3db/rock_tall3.g3db",
+  "obj_low_3":"./Level/g3db/rock_smallTop1.g3db",
+  "obj_medium_1":"./Level/g3db/rock_small5.g3db",
+  "obj_medium_2":"./Level/g3db/rock_large1.g3db",
+  "obj_high":"./Level/g3db/rocks.g3db"
+}
