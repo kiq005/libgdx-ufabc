@@ -1,0 +1,9 @@
+{
+	"heroNAttack": "./Actors/hero/Normal_Attack.g3db",
+	"heroSAttack": "./Actors/hero/Slash_Attack.g3db",
+	"heroWalk": "./Actors/hero/Walk.g3db",
+	"heroNAttack": "./Actors/hero/Normal_Attack.g3db",
+	"heroDeath": "./Actors/hero/Death.g3db",
+	"heroBlock": "./Actors/hero/Block.g3db",
+	"heroIdle": "./Actors/hero/Idle.g3db"
+}
