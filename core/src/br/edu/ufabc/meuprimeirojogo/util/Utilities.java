@@ -6,8 +6,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector3;
 
 public class Utilities {
-	public static final int GAME_WIDTH  = 800;
-	public static final int GAME_HEIGHT = 600;
+	public static final int GAME_WIDTH  = 1024;
+	public static final int GAME_HEIGHT = 768;
 	public static final Random random = new Random();
 	
 	public static Vector3 convertCoordinates(float x, float y) {

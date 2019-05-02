@@ -1,6 +1,7 @@
 package br.edu.ufabc.meuprimeirojogo.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.math.Vector3;
@@ -15,6 +16,9 @@ public class DungeonMap {
 	ObjetoColidivel ground[][];
 	ObjetoColidivel walls[][];
 	ObjetoColidivel objects[][];
+	
+	Hero hero;
+	ArrayList<Enemy> enemies;
 	
 	int width;
 	int height;
@@ -37,13 +41,18 @@ public class DungeonMap {
 	private static final int SE_WALL_CORNER = 13;
 	
 	private static final int SINGLE_WALL = 1;
+	
+	private int level;
 
-	public DungeonMap(int width, int height) {
+	public DungeonMap(int width, int height, int level) {
 		ground = new ObjetoColidivel[width][height];
 		walls = new ObjetoColidivel[width][height];
 		objects = new ObjetoColidivel[width][height];
 		this.width = width;
 		this.height = height;
+		
+		this.level = level;
+		enemies = new ArrayList<>();
 		
 		int[][] map = GenerateMaze(width, height);
 		AdjustTiles(map);
@@ -244,14 +253,70 @@ public class DungeonMap {
 		for(int x = 0; x < width; ++x) {
 			for(int y = 0; y < height; ++y) {
 				objects.add(ground[x][y]);
-				if(walls[x][y] != null) objects.add(walls[x][y]);
+				if(this.walls[x][y] != null) objects.add(this.walls[x][y]);
 				if(this.objects[x][y] != null) objects.add(this.objects[x][y]);
 			}
 		}
+		
+		enemies.forEach( e -> objects.add(e));
+		objects.add(hero);
+	}
+	
+	public Hero GetHero() {
+		return this.hero;
 	}
 	
 	private void AddObject(int x, int y) {
-		
+		if(hero == null) {
+			hero = new Hero(30, 200);
+			hero.setPosition(x + 7.5f, 2.55f, y + 7.5f);
+			hero.getGameObject().transform.scale(0.03f, 0.03f, 0.03f);
+		}
+		else if(x + y > 20 * (enemies.size()/level) && Math.random() < .125f) {
+			/*
+			Enemy enemy = new Enemy(100, 3, 20, 100, (int)(Math.random() * Enemy.enemyMap.size()), hero);
+			enemy.setPosition(x + 7.5f, 2.55f, y + 7.5f);
+			enemy.getGameObject().transform.scale(0.03f, 0.03f, 0.03f);
+			enemies.add(enemy);
+			*/
+		}
+		else {
+			double objectSelection = Math.random() * 30;
+			
+			String model_name;
+			
+			if (objectSelection < 1) {
+				model_name = "obj_s_low_1";
+			}
+			else if(objectSelection < 2) {
+				model_name = "obj_s_low_2";
+			}
+			else if(objectSelection < 4) {
+				model_name = "obj_low_1";
+			}
+			else if(objectSelection < 6) {
+				model_name = "obj_low_2";
+			}
+			else if(objectSelection < 8) {
+				model_name = "obj_low_3";
+			}
+			else if(objectSelection < 11) {
+				model_name = "obj_medium_1";
+			}
+			else if(objectSelection < 14) {
+				model_name = "obj_medium_2";
+			}
+			else if(objectSelection < 20) {
+				model_name = "obj_high";
+			}
+			else {
+				return;
+			}
+			
+			Model go = MeuJogo.modelManager.getModel(model_name);
+			objects[x][y] = new ObjetoColidivel(go);
+			objects[x][y].getGameObject().transform.setToTranslation(new Vector3(x * 10, 0, y * 10));
+		}
 	}
 	
 	

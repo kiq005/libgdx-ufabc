@@ -12,13 +12,15 @@ import br.edu.ufabc.meuprimeirojogo.model.Hero;
 public class DungeonAction {
 
 	protected Array<AbstractModel> objects;
+	protected Hero hero;
 
 	public DungeonAction() {
-		DungeonMap map = new DungeonMap(50, 50);
+		DungeonMap map = new DungeonMap(50, 50, 1);
+		hero = map.GetHero();
 		
 		objects = new Array<AbstractModel>();
 		
-//		Hero hero = new Hero(30, 200);
+//		hero = new Hero(30, 200);
 //		hero.setPosition(40, 2.55f, 40);
 //		
 //		Enemy enemy = new Enemy(100, 3, 20, 100, Enemy.MUTANT, hero);

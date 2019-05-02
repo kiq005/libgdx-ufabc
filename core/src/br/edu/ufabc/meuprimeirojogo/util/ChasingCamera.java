@@ -9,17 +9,22 @@ import br.edu.ufabc.meuprimeirojogo.core.GameObject;
 public class ChasingCamera extends PerspectiveCamera {
 	private GameObject objectToFollow;
 	private Vector3 objectPosition;
-	private float offsetZ = -2;
-	private float offsetY = 1.5f;
+	
+	private float cameraOffsetY;
+	private float cameraOffsetZ;
+	private float targetOffsetY; 
 
-	public ChasingCamera(float fov, float width, float height, float offsetY, float offsetZ) {
+	public ChasingCamera(float fov, float width, float height, float cameraOffsetY, float cameraOffsetZ, float targetOffsetY) {
 		super(fov, width, height);
-		this.offsetY = offsetY;
-		this.offsetZ = offsetZ;
+		
+		this.cameraOffsetY = cameraOffsetY;
+		this.cameraOffsetZ = cameraOffsetZ;
+		this.targetOffsetY = targetOffsetY; 
+		
 		objectPosition = new Vector3();
 	}
 	
-
+/*
 	public float getOffsetZ() {
 		return offsetZ;
 	}
@@ -38,7 +43,7 @@ public class ChasingCamera extends PerspectiveCamera {
 	public void setOffsetY(float offsetY) {
 		this.offsetY = offsetY;
 	}
-
+*/
 
 	public void setObjectToFollow(GameObject obj) {
 		this.objectToFollow = obj;
@@ -46,19 +51,23 @@ public class ChasingCamera extends PerspectiveCamera {
 
 	public void update() {
 		if (objectToFollow != null) {
-
 			objectToFollow.transform.getTranslation(objectPosition);
 			float angulo = objectToFollow.getAngle();
 			
-			float newX = objectPosition.x + (float)(offsetZ*Math.sin(Math.toRadians(angulo)));
-			float newY = objectPosition.y + offsetY;
-			float newZ = objectPosition.z + (float)(offsetZ*Math.cos(Math.toRadians(angulo)));
+			float newX = objectPosition.x + (float)(cameraOffsetZ*Math.sin(Math.toRadians(angulo)));
+			float newY = objectPosition.y + cameraOffsetY;
+			float newZ = objectPosition.z + (float)(cameraOffsetZ*Math.cos(Math.toRadians(angulo)));
 			
 	        Vector3 currentPosition = this.position;
 	        Vector3 newPosition     = new Vector3(newX, newY, newZ);
 	        
 			this.position.set(currentPosition.interpolate(newPosition, 0.5f, Interpolation.linear));
-			this.lookAt(objectPosition.x, newY, objectPosition.z);
+			this.lookAt(objectPosition.x, objectPosition.y + targetOffsetY, objectPosition.z);
+			
+			this.up.y = 90f;
+			this.up.z = 0;
+			this.normalizeUp();
+			
 		}
 		super.update();
 	}
