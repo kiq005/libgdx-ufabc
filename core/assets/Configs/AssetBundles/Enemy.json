@@ -1,14 +1,14 @@
 {
-    "mutantIdle": "./Actors/enemy/mutant/idle.g3db",
-    "mutantRunning": "./Actors/enemy/mutant/running.g3db",
-    "mutantAttacking": "./Actors/enemy/mutant/punching.g3db",
-    "mutantDying": "./Actors/enemy/mutant/dying.g3db",
-    "nightshadeIdle": "./Actors/enemy/nightshade/idle.g3db",
-    "nightshadeRunning": "./Actors/enemy/nightshade/running.g3db",
-    "nightshadeAttacking": "./Actors/enemy/nightshade/kicking.g3db",
-    "nightshadeDying": "./Actors/enemy/nightshade/dying.g3db",
-    "skeletonzombieIdle": "./Actors/enemy/skeletonzombie/idle.g3db",
-    "skeletonzombieRunning": "./Actors/enemy/skeletonzombie/running.g3db",
-    "skeletonzombieAttacking": "./Actors/enemy/skeletonzombie/punching.g3db",
-    "skeletonzombieDying": "./Actors/enemy/skeletonzombie/dying.g3db"
+    "mutantIdle": "./Actors/mutant/idle.g3db",
+    "mutantRunning": "./Actors/mutant/running.g3db",
+    "mutantAttacking": "./Actors/mutant/punching.g3db",
+    "mutantDying": "./Actors/mutant/dying.g3db",
+    "nightshadeIdle": "./Actors/nightshade/idle.g3db",
+    "nightshadeRunning": "./Actors/nightshade/running.g3db",
+    "nightshadeAttacking": "./Actors/nightshade/kicking.g3db",
+    "nightshadeDying": "./Actors/nightshade/dying.g3db",
+    "skeletonzombieIdle": "./Actors/skeletonzombie/idle.g3db",
+    "skeletonzombieRunning": "./Actors/skeletonzombie/running.g3db",
+    "skeletonzombieAttacking": "./Actors/skeletonzombie/punching.g3db",
+    "skeletonzombieDying": "./Actors/skeletonzombie/dying.g3db"
 }

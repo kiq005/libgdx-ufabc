@@ -39,7 +39,7 @@ public class MeuJogo extends Game implements InputProcessor {
 		modelManager = new ModelManager();
 		modelBuider  = new ModelBuilder();
 		
-		currentScreen = new StartScreen("LOADING", new String[] {"Level1", "Enemy"});
+		currentScreen = new StartScreen("LOADING", new String[] {"Cave", "Enemy", "Collectables"});
 		setScreen(currentScreen);
 	}
 
@@ -50,7 +50,7 @@ public class MeuJogo extends Game implements InputProcessor {
 			if (currentScreen.getId().equals("LOADING")) {
 				currentScreen = new Dungeon("DUNGEON");
 			} else {
-				currentScreen = new StartScreen("LOADING", new String[] {"Level1", "Enemy"});
+				currentScreen = new StartScreen("LOADING", new String[] {"Cave", "Enemy", "Collectables"});
 			}
 
 		}

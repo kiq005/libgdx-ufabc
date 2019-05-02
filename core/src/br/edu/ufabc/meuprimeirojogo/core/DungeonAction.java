@@ -18,19 +18,17 @@ public class DungeonAction {
 		
 		objects = new Array<AbstractModel>();
 		
-		/*
-		Hero hero = new Hero(30, 200);
-		hero.setPosition(40, 2.55f, 40);
-		
-		Enemy enemy = new Enemy(100, 3, 20, 100, Enemy.MUTANT, hero);
-		enemy.setPosition(20, 2.55f, 20);
-				
-		objects.add(hero);
-		objects.add(enemy);
-		
-		enemy.getGameObject().transform.scale(0.03f, 0.03f, 0.03f);
-		hero.getGameObject().transform.scale(0.03f, 0.03f, 0.03f);
-		*/
+//		Hero hero = new Hero(30, 200);
+//		hero.setPosition(40, 2.55f, 40);
+//		
+//		Enemy enemy = new Enemy(100, 3, 20, 100, Enemy.MUTANT, hero);
+//		enemy.setPosition(20, 2.55f, 20);
+//				
+//		objects.add(hero);
+//		objects.add(enemy);
+//		
+//		enemy.getGameObject().transform.scale(0.03f, 0.03f, 0.03f);
+//		hero.getGameObject().transform.scale(0.03f, 0.03f, 0.03f);
 		
 		map.AddToObjectList(objects);
 		
