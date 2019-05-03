@@ -1,11 +1,11 @@
 # libgdx-ufabc
 
 TODO:
-- [ ] Create a JSON based asset loader to control game objects loading by level
-- [ ] Create a test map
-- [ ] Create a base player character
-- [ ] Create a base enemy
-- [ ] Implement auto-generated dungeons
+- [x] Create a JSON based asset loader to control game objects loading by level
+- [x] Create a test map
+- [x] Create a base player character
+- [x] Create a base enemy
+- [x] Implement auto-generated dungeons
 - [ ] Implement combat system
 - [ ] Create main map
 
