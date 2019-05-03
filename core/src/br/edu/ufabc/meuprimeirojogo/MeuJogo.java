@@ -1,10 +1,6 @@
 package br.edu.ufabc.meuprimeirojogo;
 
 
-import java.io.File;
-
-import javax.swing.plaf.synth.SynthSeparatorUI;
-
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -14,16 +10,13 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.particles.ParticleSystem;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
-import com.badlogic.gdx.math.Vector3;
 
 import br.edu.ufabc.meuprimeirojogo.core.ModelManager;
 import br.edu.ufabc.meuprimeirojogo.screen.Dungeon;
-import br.edu.ufabc.meuprimeirojogo.screen.GameScreen;
+import br.edu.ufabc.meuprimeirojogo.screen.EndScreen;
 import br.edu.ufabc.meuprimeirojogo.screen.MyScreen;
 import br.edu.ufabc.meuprimeirojogo.screen.StartScreen;
-import br.edu.ufabc.meuprimeirojogo.util.GamePad;
 import br.edu.ufabc.meuprimeirojogo.util.InputHandler;
-import br.edu.ufabc.meuprimeirojogo.util.Utilities;
 
 public class MeuJogo extends Game {
 
@@ -33,6 +26,7 @@ public class MeuJogo extends Game {
 	public static boolean DEBUG = false;
 	public static InputHandler inputHandler;
 	public static ParticleSystem particleSystem;
+	public static String[] assetsToLoad = new String[] {"Cave", "Enemy", "Collectables", "Hero"};
 
 	@Override
 	public void create() {
@@ -41,7 +35,7 @@ public class MeuJogo extends Game {
 		modelManager = new ModelManager();
 		modelBuider  = new ModelBuilder();
 		
-		currentScreen = new StartScreen("LOADING", new String[] {"Cave", "Enemy", "Collectables", "Hero"});
+		currentScreen = new StartScreen("LOADING", assetsToLoad);
 		setScreen(currentScreen);
 	}
 
@@ -54,9 +48,12 @@ public class MeuJogo extends Game {
 			// aqui eu cuido da transição das telas
 			if (currentScreen.getId().equals("LOADING")) {
 				currentScreen = new Dungeon("DUNGEON");
-			} else {
+			} else if (currentScreen.getId().equals("DUNGEON")) {
 				//Trocar cenario
-				currentScreen = new StartScreen("LOADING", new String[] {"Cave", "Enemy", "Collectables", "Hero"});
+				currentScreen = new EndScreen("YOUDIED");
+			}
+			else {
+				currentScreen = new StartScreen("LOADING");
 			}
 
 		}

@@ -28,7 +28,7 @@ public class EndScreen extends MyScreen {
 	private boolean stringDone = false;
 	private Music sounds;
 
-	public EndScreen(String id, String[] bundlesToLoad) {
+	public EndScreen(String id) {
 		super(id);
 		texture = new Texture("end.jpg");
 		spriteBatch = new SpriteBatch();
@@ -39,7 +39,6 @@ public class EndScreen extends MyScreen {
 		sounds.setLooping(true);
 		//sounds.play();
 		
-		MeuJogo.modelManager.loadBundle(bundlesToLoad);
 	}
 
 	@Override
