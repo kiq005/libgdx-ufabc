@@ -41,5 +41,4 @@ public class InputHandler {
 		if ( Gdx.input.isKeyPressed(Keys.SHIFT_LEFT) || Gdx.input.isKeyPressed(Keys.SHIFT_RIGHT) )
 			run = true;
 	}
-	
 }

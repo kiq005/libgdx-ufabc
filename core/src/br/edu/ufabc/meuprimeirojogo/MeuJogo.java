@@ -40,7 +40,7 @@ public class MeuJogo extends Game {
 		modelManager = new ModelManager();
 		modelBuider  = new ModelBuilder();
 		
-		currentScreen = new StartScreen("LOADING", new String[] {"Cave", "Enemy", "Collectables"});
+		currentScreen = new StartScreen("LOADING", new String[] {"Cave", "Enemy", "Collectables", "Hero"});
 		setScreen(currentScreen);
 	}
 
@@ -52,7 +52,7 @@ public class MeuJogo extends Game {
 			if (currentScreen.getId().equals("LOADING")) {
 				currentScreen = new Dungeon("DUNGEON");
 			} else {
-				currentScreen = new StartScreen("LOADING", new String[] {"Cave", "Enemy", "Collectables"});
+				currentScreen = new StartScreen("LOADING", new String[] {"Cave", "Enemy", "Collectables", "Hero"});
 			}
 
 		}
