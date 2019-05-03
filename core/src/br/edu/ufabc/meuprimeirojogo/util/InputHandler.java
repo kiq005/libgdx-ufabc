@@ -4,9 +4,9 @@ public class InputHandler {
 	
 	
 	
-	public update()
+	public void update()
 	{
-		return null;
+		return ;
 	}
 
 }
