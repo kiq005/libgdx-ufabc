@@ -268,14 +268,14 @@ public class DungeonMap {
 	
 	private void AddObject(int x, int y) {
 		if(hero == null) {
-			hero = new Hero(30, 200);
+			hero = new Hero(35, 200);
 			hero.setPosition(x + 7.5f, 2.55f, y + 7.5f);
-			hero.getGameObject().transform.scale(0.03f, 0.03f, 0.03f);
+			hero.setScale(0.03f);
 		}
 		else if(x + y > 20 * (enemies.size()/level) && Math.random() < .125f) {
-			Enemy enemy = new Enemy(100, 3, 20, 100, (int)(Math.random() * Enemy.enemyMap.size()), hero);
+			Enemy enemy = new Enemy(20, 3, 20, 100, (int)(Math.random() * Enemy.enemyMap.size()), hero);
 			enemy.setPosition(x + 7.5f, 2.55f, y + 7.5f);
-			enemy.getGameObject().transform.scale(0.03f, 0.03f, 0.03f);
+			enemy.setScale(0.03f);
 			enemies.add(enemy);
 		}
 		else {
@@ -317,5 +317,12 @@ public class DungeonMap {
 		}
 	}
 	
+	public int CountEnemies() {
+		int enemiesCount = 0;
+		for(Enemy e : enemies) {
+			if(e.getHealthPoints() > 0) ++enemiesCount;
+		}
+		return enemiesCount;
+	}
 	
 }

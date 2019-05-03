@@ -15,10 +15,11 @@ import br.edu.ufabc.meuprimeirojogo.core.GameObject;
 
 public class Hero extends AbstractCharacter {
 
-	private static final float turn_speed = 10f;
-	private static float move_speed = 25f;
+	private static float turn_speed = 100f;
+	private static float move_speed = 250f;
 	
 	private Enemy enemy;
+	private int enemyCounter = 0;
 
 	public static final int IDLE = 0;
 	public static final int WALKING = 1;
@@ -34,26 +35,6 @@ public class Hero extends AbstractCharacter {
 	private static boolean moveable = true;
 	
 	private PointLight light;
-
-	@Override
-	public void update(float delta) {
-		updateInput();
-		characters[state].update(delta);
-		light.setPosition(this.getPosition().add(3f, 13f, 3f));
-	}
-	
-	public void updateInput() {
-		float angle = getGameObject().getAngle();
-		float r = MeuJogo.inputHandler.y_axis * move_speed;
-		
-		Vector3 dir = new Vector3();
-		dir.x = (float) (r * Math.cos(Math.toRadians(angle + 90f)) );
-		dir.z = (float) (r * Math.sin(Math.toRadians(angle + 90f)) );
-		
-		this.setPosition(dir);
-		this.setRotation( MeuJogo.inputHandler.x_axis * turn_speed);
-	}
-
 	
 	public Hero(float strength, float healthPoints) 
 	{
@@ -70,14 +51,65 @@ public class Hero extends AbstractCharacter {
 
 		characters = new GameObject[7];
 		characters[IDLE] = new GameObject(modelIdle, true, true, true, 1.0f);
-		characters[WALKING] = new GameObject(modelWalk, true, true, true, 1.0f);
-		characters[DYING] = new GameObject(modelDeath, true, true, true, 1.0f);
+		characters[WALKING] = new GameObject(modelWalk, true, true, true, -1.0f);
+		characters[DYING] = new GameObject(modelDeath, true, true, false, 1.0f);
 		characters[SLASH_ATTACKING] = new GameObject(modelSAttack, true, true, true, 1.0f);
-		characters[ATTACKING] = new GameObject(modelNAttack, true, true, false, 1.0f);
-		characters[RUNNING] = new GameObject(modelRunning, true, true, false, 1.0f);
-		characters[BLOCKING] = new GameObject(modelBlock, true, true, false, 1.0f);
+		characters[ATTACKING] = new GameObject(modelNAttack, true, true, true, 1.0f);
+		characters[RUNNING] = new GameObject(modelRunning, true, true, true, 1.0f);
+		characters[BLOCKING] = new GameObject(modelBlock, true, true, true, 1.0f);
 		
 		light = new PointLight().set(Color.WHITE, this.getPosition(), 50f);
+	}
+
+	@Override
+	public void update(float delta) {
+		updateInput(delta);
+		updateState();
+		characters[state].update(delta);
+		light.setPosition(this.getPosition().add(3f, 13f, 3f));
+	}
+	
+	public void updateInput(float delta) {
+		float angle = getGameObject().getAngle();
+		float r = MeuJogo.inputHandler.y_axis * move_speed;
+		
+		Vector3 dir = new Vector3();
+		dir.x = (float) (r * Math.cos(Math.toRadians(angle + 90f)) );
+		dir.z = (float) (r * Math.sin(Math.toRadians(angle + 90f)) );
+		
+		if(state == WALKING || state == RUNNING) {
+			this.setPosition(dir.scl(delta));
+			this.setRotation( MeuJogo.inputHandler.x_axis * turn_speed * delta);
+		}
+	}
+	
+	public void updateState() {
+		if (this.getHealthPoints() <= 0)
+			die();
+		
+		if (state == DYING) {
+			if(characters[state].isAnimationFinished())
+				MeuJogo.currentScreen.setDone(true);
+		}
+		else if(state == ATTACKING || state == SLASH_ATTACKING) {
+			if(characters[state].isAnimationFinished()) {
+				characters[state].resetAnimation();
+				if(enemy != null) enemy.applyDamage(this.getStrength());
+				idle();
+			}
+		}
+		else {
+			if(MeuJogo.inputHandler.attack)
+				slash_attack();
+			else if(Math.abs(MeuJogo.inputHandler.y_axis) > 0 || Math.abs(MeuJogo.inputHandler.x_axis) > 0) {
+				if (MeuJogo.inputHandler.run)
+					run();
+				else
+					walk();
+			}
+			else
+				idle();
+		}
 	}
 	
 	private void block() {
@@ -85,18 +117,24 @@ public class Hero extends AbstractCharacter {
  	}
 	
 	private void walk() {
+		move_speed = 250f;
+		turn_speed = 150f;
  		state = WALKING;
  	}
  	
 	private void attack() {
-	state = ATTACKING;
+		state = ATTACKING;
 	}
 	
 	private void run() {
+		move_speed = 500f;
+		turn_speed = 200f;
  		state = RUNNING;
 	}
 
  	private void idle() {
+ 		move_speed = 0f;
+ 		turn_speed = 200f;
 		state = IDLE;
 	}
  	
@@ -110,11 +148,19 @@ public class Hero extends AbstractCharacter {
 
 	@Override
 	public GameObject getGameObject() {
-		return characters[0];
+		return characters[state];
 	}
 	
 	public PointLight GetLight() {
 		return light;
+	}
+	
+	public void SetEnemy(Enemy enemy) {
+		this.enemy = enemy;
+	}
+	
+	public void SetCounter(int n) {
+		enemyCounter = n;
 	}
 	
 }

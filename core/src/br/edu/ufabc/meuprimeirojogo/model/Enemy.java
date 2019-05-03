@@ -27,6 +27,8 @@ public class Enemy extends AbstractCharacter {
 	private float visionBigRadius;
 	private float visionSmallRadius;
 	
+	private static final float speed = 5f;
+	
 	public static HashMap<Integer, String> enemyMap;
 	static {
 		enemyMap = new HashMap<Integer, String>();
@@ -42,8 +44,6 @@ public class Enemy extends AbstractCharacter {
 		state = IDLE;
 		this.visionBigRadius = visionBigRadius;
 		this.visionSmallRadius = visionSmallRadius;
-		this.setStrength(strength);
-		this.setHealthPoints(healthPoints);
 		this.hero = hero;
 		
 		// just making sure that the user won't screw the game by providing an invalid enemy type
@@ -84,13 +84,16 @@ public class Enemy extends AbstractCharacter {
 	}
  	
  	private void lookAtHero() {
+ 		
  		Vector3 enemyPosition = this.getPosition();
  		Vector3 heroPosition = hero.getPosition();
  		
- 		float angle = (float) Math.atan2( heroPosition.y - enemyPosition.y, heroPosition.x - enemyPosition.x);
- 		angle -= this.getGameObject().transform.getRotation(new Quaternion()).getYaw();
+ 		float angle = (float)Math.toDegrees(Math.atan2( heroPosition.z - enemyPosition.z, heroPosition.x - enemyPosition.x));
+ 		float curAngle = (float)Math.toDegrees(this.getGameObject().transform.getRotation(new Quaternion()).getYaw());
  		
- 		this.setRotation(angle);
+ 		
+ 		this.setRotation( (angle - curAngle) );
+ 		
  	}
 
  	public void update(float delta) {
@@ -112,10 +115,11 @@ public class Enemy extends AbstractCharacter {
 				else if (heroDistance <= this.visionSmallRadius) 
 					attack();			
 				else {
-					Vector3 enemyPosition = this.getPosition();
-					enemyPosition.interpolate(hero.getPosition(), 0.1f, Interpolation.linear);
-					this.setPosition(enemyPosition);
-					//this.getGameObject().transform.setTranslation(enemyPosition);
+					this.setPosition( getPosition().sub(hero.getPosition()).nor().scl(-speed) );
+					
+					//Vector3 enemyPosition = this.getPosition();
+					//enemyPosition.interpolate(hero.getPosition(), 0.1f, Interpolation.linear);
+					//this.setPosition(enemyPosition);
 				}
 				break;
 			case ATTACKING:
@@ -134,7 +138,6 @@ public class Enemy extends AbstractCharacter {
 				break;
 			}
 		}
-		
 		characters[state].update(delta);
 	}
  	

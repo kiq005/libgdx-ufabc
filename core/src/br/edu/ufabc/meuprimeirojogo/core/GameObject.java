@@ -69,20 +69,17 @@ public class GameObject extends ModelInstance{
 		controller = new AnimationController(this);
 		if (animated) {
 			controller.setAnimation(this.animations.first().id, (looped)? -1: 1, loopSpeed, 
-					new AnimationListener() {
+				new AnimationListener() {
 
-						@Override
-						public void onEnd(AnimationDesc animation) {
-							// TODO Auto-generated method stub
-							animationFinished = true;
-						}
+				@Override
+				public void onEnd(AnimationDesc animation) {
+					animationFinished = true;
+				}
 
-						@Override
-						public void onLoop(AnimationDesc animation) {
-							// TODO Auto-generated method stub
-							animationFinished = true;
-						}
-				
+				@Override
+				public void onLoop(AnimationDesc animation) {
+					animationFinished = true;
+				}
 			});
 		}
 	}
@@ -101,9 +98,6 @@ public class GameObject extends ModelInstance{
 		if (animated) {
 		   controller.update(delta);
 		}
-		// for debug reasons
-		
-		
 	}
 	public boolean isVisible() {
 		return visible;

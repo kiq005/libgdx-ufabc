@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import br.edu.ufabc.meuprimeirojogo.model.Hero;
 import br.edu.ufabc.meuprimeirojogo.util.Utilities;
 
 public class HUD {
@@ -20,9 +21,11 @@ public class HUD {
 	private Texture _power_sword;
 	private Texture _power_water;
 	
-	private float player_health;
+	private DungeonAction action;
 	
-	public HUD() {
+	public HUD(DungeonAction action) {
+		this.action = action;
+		
 		_hud_bg = new Texture(Gdx.files.internal("UI/HUD/inventory-middle.png"));
 		
 		_health_lanter_bg = new Texture(Gdx.files.internal("UI/HUD/health-lantern.png"));
@@ -36,13 +39,11 @@ public class HUD {
 		_power_speed = new Texture(Gdx.files.internal("UI/HUD/power-speed.png"));
 		_power_sword = new Texture(Gdx.files.internal("UI/HUD/power-sword.png"));
 		_power_water = new Texture(Gdx.files.internal("UI/HUD/power-water.png"));
-		
-		player_health = 1f;
 	}
 
 	public void draw(SpriteBatch batch) {
 		batch.draw(_health_lanter_bg, 10, 10, 64, 120);
-		batch.draw(_health_bar, 20, 30, 44, 50 * player_health);
+		batch.draw(_health_bar, 20, 30, 44, 50 * Math.max(0f, action.hero.getHealthPoints() / action.hero.getMaxHealthPoints()) );
 		batch.draw(_health_lanter_fg, 10, 10, 64, 120);
 		
 		batch.draw(_power_box, 80, 10, 40, 40);

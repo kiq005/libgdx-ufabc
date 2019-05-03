@@ -26,7 +26,7 @@ import br.edu.ufabc.meuprimeirojogo.util.Utilities;
 
 public class MeuJogo extends Game {
 
-	private MyScreen currentScreen;
+	public static MyScreen currentScreen;
 	public static ModelManager modelManager;
 	public static ModelBuilder modelBuider;
 	public static boolean DEBUG = false;

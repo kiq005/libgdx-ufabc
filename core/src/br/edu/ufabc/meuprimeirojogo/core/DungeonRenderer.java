@@ -35,7 +35,7 @@ public class DungeonRenderer {
 	public DungeonRenderer(DungeonAction action) {
 		this.gameAction = action;
 		
-		hud = new HUD();
+		hud = new HUD(action);
 		
 		modelBatch = new ModelBatch();
 		environment = new Environment();
@@ -57,10 +57,11 @@ public class DungeonRenderer {
 		spritebatch = new SpriteBatch();
 		viewMatrix = new Matrix4();
 		tranMatrix = new Matrix4();
-		camera.setObjectToFollow(gameAction.hero.getGameObject());
 	}
 
 	public void draw(float delta) {
+		camera.setObjectToFollow(gameAction.hero.getGameObject());
+		
 		Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		Gdx.gl.glClearColor(0, 0, 0, 0);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);

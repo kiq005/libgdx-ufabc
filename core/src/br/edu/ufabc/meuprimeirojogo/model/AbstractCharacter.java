@@ -12,6 +12,7 @@ public abstract class AbstractCharacter extends AbstractModel {
 	
 	private float strength = 20;
 	private float healthPoints = 100;
+	private float maxHealthPoints = 100;
 	
 	public AbstractCharacter(boolean collidable, boolean moveable) {
 		super(collidable, moveable);
@@ -21,10 +22,15 @@ public abstract class AbstractCharacter extends AbstractModel {
 		super(collidable, moveable);
 		this.strength = customStrength;
 		this.healthPoints = customHealthPoints;
+		this.maxHealthPoints = customHealthPoints;
 	}
 	
 	public float getHealthPoints() {
 		return healthPoints;
+	}
+	
+	public float getMaxHealthPoints() {
+		return maxHealthPoints;
 	}
 	
 	public void setHealthPoints(float healthPoints) {
@@ -69,9 +75,7 @@ public abstract class AbstractCharacter extends AbstractModel {
  	}
  	
  	public Vector3 getPosition() {
- 		Vector3 characterPosition = new Vector3();
- 		this.getGameObject().transform.getTranslation(characterPosition);
- 		return characterPosition;
+ 		return this.getGameObject().transform.getTranslation(new Vector3());
  	}
 	
 	@Override
