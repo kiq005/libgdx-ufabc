@@ -30,6 +30,17 @@ public class StartScreen extends MyScreen {
 
 	public StartScreen(String id, String[] bundlesToLoad) {
 		super(id);
+		loadScreen();
+		
+		MeuJogo.modelManager.loadBundle(bundlesToLoad);
+	}
+	
+	public StartScreen(String id) {
+		super(id);
+		loadScreen();
+	}
+	
+	public void loadScreen() {
 		texture = new Texture("start.jpg");
 		spriteBatch = new SpriteBatch();
 		viewMatrix = new Matrix4();
@@ -38,8 +49,6 @@ public class StartScreen extends MyScreen {
 		sounds = Gdx.audio.newMusic(Gdx.files.internal("SFX/loopshot2.mp3"));
 		sounds.setLooping(true);
 		//sounds.play();
-		
-		MeuJogo.modelManager.loadBundle(bundlesToLoad);
 	}
 
 	@Override
