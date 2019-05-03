@@ -1,5 +1,5 @@
 {
-	"heroNAttack": "./Actors/hero/Normal_Attack.g3db",
+	"heroRunning": "./Actors/hero/Running.g3db",
 	"heroSAttack": "./Actors/hero/Slash_Attack.g3db",
 	"heroWalk": "./Actors/hero/Walk.g3db",
 	"heroNAttack": "./Actors/hero/Normal_Attack.g3db",

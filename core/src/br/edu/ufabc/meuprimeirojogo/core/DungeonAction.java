@@ -18,7 +18,7 @@ public class DungeonAction {
 		
 		objects = new Array<AbstractModel>();
 		
-		Hero hero = new Hero(100, 3, 220, 500, Hero.HERO);
+		Hero hero = new Hero(100,500);
 		hero.setPosition(35, 2.55f, 40);
 //		
 //		Enemy enemy = new Enemy(100, 3, 80, 750, Enemy.MUTANT, hero);
