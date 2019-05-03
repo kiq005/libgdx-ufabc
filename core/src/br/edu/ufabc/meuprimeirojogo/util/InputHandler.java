@@ -31,9 +31,9 @@ public class InputHandler {
 		if ( Gdx.input.isKeyPressed(Keys.S) || Gdx.input.isKeyPressed(Keys.DOWN) )
 			y_axis = -1f;
 		if ( Gdx.input.isKeyPressed(Keys.A) || Gdx.input.isKeyPressed(Keys.LEFT) )
-			x_axis = -1f;
-		if ( Gdx.input.isKeyPressed(Keys.D) || Gdx.input.isKeyPressed(Keys.RIGHT) )
 			x_axis = 1f;
+		if ( Gdx.input.isKeyPressed(Keys.D) || Gdx.input.isKeyPressed(Keys.RIGHT) )
+			x_axis = -1f;
 		if ( Gdx.input.isButtonPressed(Buttons.LEFT) || Gdx.input.isKeyPressed(Keys.SPACE) )
 			attack = true;
 		if ( Gdx.input.isButtonPressed(Buttons.RIGHT) || Gdx.input.isKeyPressed(Keys.F) )

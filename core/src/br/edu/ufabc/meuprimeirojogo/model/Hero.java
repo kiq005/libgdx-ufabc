@@ -10,6 +10,9 @@ import br.edu.ufabc.meuprimeirojogo.core.GameObject;
 
 public class Hero extends AbstractCharacter {
 
+	private static final float turn_speed = 10f;
+	private static float move_speed = 25f;
+	
 	private static boolean collidable = true;
 	private static boolean moveable = true;
 	
@@ -26,20 +29,21 @@ public class Hero extends AbstractCharacter {
 
 	@Override
 	public void update(float delta) {
-		// Input
 		updateInput();
-		// 
 		characters[0].update(delta);
 		light.setPosition(this.getPosition().add(3f, 13f, 3f));
 	}
 	
 	public void updateInput() {
 		float angle = getGameObject().getAngle();
-		
+		float r = MeuJogo.inputHandler.y_axis * move_speed;
 		
 		Vector3 dir = new Vector3();
+		dir.x = (float) (r * Math.cos(Math.toRadians(angle + 90f)) );
+		dir.z = (float) (r * Math.sin(Math.toRadians(angle + 90f)) );
 		
-		
+		this.setPosition(dir);
+		this.setRotation( MeuJogo.inputHandler.x_axis * turn_speed);
 	}
 
 	@Override
