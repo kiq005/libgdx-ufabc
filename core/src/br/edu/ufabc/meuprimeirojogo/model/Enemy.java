@@ -3,14 +3,13 @@ package br.edu.ufabc.meuprimeirojogo.model;
 import java.util.HashMap;
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.math.Vector3;
 
 import br.edu.ufabc.meuprimeirojogo.MeuJogo;
 import br.edu.ufabc.meuprimeirojogo.core.GameObject;
 
 public class Enemy extends AbstractCharacter {
-	
-	public int angle;
 	
 	public static final int IDLE = 0;
 	public static final int RUNNING = 1;
@@ -83,6 +82,16 @@ public class Enemy extends AbstractCharacter {
  	private void dead() {
 		state = DEAD;
 	}
+ 	
+ 	private void lookAtHero() {
+ 		Vector3 enemyPosition = this.getPosition();
+ 		Vector3 heroPosition = hero.getPosition();
+ 		
+ 		float angle = (float) Math.atan2( heroPosition.y - enemyPosition.y, heroPosition.x - enemyPosition.x);
+ 		angle -= this.getGameObject().transform.getRotation(new Quaternion()).getYaw();
+ 		
+ 		this.setRotation(angle);
+ 	}
 
  	public void update(float delta) {
 		float heroDistance = this.getHeroDistance();
@@ -97,6 +106,7 @@ public class Enemy extends AbstractCharacter {
 					run();
 				break;
 			case RUNNING:
+				lookAtHero();
 				if (heroDistance > this.visionBigRadius) 
 					idle();
 				else if (heroDistance <= this.visionSmallRadius) 
@@ -104,10 +114,12 @@ public class Enemy extends AbstractCharacter {
 				else {
 					Vector3 enemyPosition = this.getPosition();
 					enemyPosition.interpolate(hero.getPosition(), 0.1f, Interpolation.linear);
-					this.getGameObject().transform.setTranslation(enemyPosition);
+					this.setPosition(enemyPosition);
+					//this.getGameObject().transform.setTranslation(enemyPosition);
 				}
 				break;
 			case ATTACKING:
+				lookAtHero();
 				if (this.getGameObject().isAnimationFinished()) {
 					if (heroDistance <= this.visionSmallRadius)
 						hero.applyDamage(this.getStrength());
@@ -128,13 +140,6 @@ public class Enemy extends AbstractCharacter {
  	
 	public float getHeroDistance() {
 		return hero.getPosition().dst(this.getPosition());
-	}
-	
- 	public void rotate(int angle) {
-		this.angle += angle;
-		for (int i = 0; i < 4; i++) {
-			characters[i].transform.rotate(Vector3.Y, angle);
-		}
 	}
 
 	

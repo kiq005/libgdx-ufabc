@@ -72,12 +72,8 @@ public class Renderer {
 		}
 		modelBatch.end();
 		camera.update();
+		
 		spritebatch.begin();
-
-		if (MeuJogo.gamePad.enabled)
-			for (Button button : MeuJogo.gamePad.getButtons()) {
-				spritebatch.draw(button.getTexture(), button.getPosX(), button.getPosY());
-			}
 		spritebatch.end();
 
 //		if (Commands.set[Commands.SHOT]) {

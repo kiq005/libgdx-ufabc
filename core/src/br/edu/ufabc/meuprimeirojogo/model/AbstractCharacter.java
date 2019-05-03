@@ -44,11 +44,29 @@ public abstract class AbstractCharacter extends AbstractModel {
 		this.healthPoints -= damageAmount; 
 	}
 	
- 	public void setPosition(float x, float y, float z){
+	public void setPosition(Vector3 pos) {
 		for (int i = 0; i < characters.length; i++) {
+			characters[i].transform.translate(pos);
+		}
+	}
+	
+ 	public void setPosition(float x, float y, float z){
+ 		for (int i = 0; i < characters.length; i++) {
 			characters[i].transform.translate(x, y, z);
 		}
 	}
+ 	
+ 	public void setRotation(float angle) {
+ 		for (int i = 0; i < characters.length; i++) {
+			characters[i].transform.rotate(Vector3.Y, angle);
+		}
+ 	}
+ 	
+ 	public void setScale(float value) {
+ 		for (int i = 0; i < characters.length; i++) {
+			characters[i].transform.scale(value, value, value);
+		}
+ 	}
  	
  	public Vector3 getPosition() {
  		Vector3 characterPosition = new Vector3();
