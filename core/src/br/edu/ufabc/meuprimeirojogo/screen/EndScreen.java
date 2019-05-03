@@ -11,7 +11,7 @@ import com.badlogic.gdx.math.Matrix4;
 import br.edu.ufabc.meuprimeirojogo.MeuJogo;
 import br.edu.ufabc.meuprimeirojogo.util.Utilities;
 
-public class StartScreen extends MyScreen {
+public class EndScreen extends MyScreen {
 
 	private Texture texture;
 	private SpriteBatch spriteBatch;
@@ -22,19 +22,19 @@ public class StartScreen extends MyScreen {
 	private int progress = 0;
 	private boolean visible = true;
 	private float time = 0.0f;
-	private String gameTitle = "Diablo Clone by Nóis";
+	private String gameTitle = "You died . . .";
 	private float stringTime = 0.0f;
 	private int stringIndex = 1;
 	private boolean stringDone = false;
 	private Music sounds;
 
-	public StartScreen(String id, String[] bundlesToLoad) {
+	public EndScreen(String id, String[] bundlesToLoad) {
 		super(id);
-		texture = new Texture("start.jpg");
+		texture = new Texture("end.jpg");
 		spriteBatch = new SpriteBatch();
 		viewMatrix = new Matrix4();
 		tranMatrix = new Matrix4();
-		bitmapFont = new BitmapFont(Gdx.files.internal("Fonts/diabloFont.fnt"));
+		bitmapFont = new BitmapFont(Gdx.files.internal("Fonts/endGameFont.fnt"));
 		sounds = Gdx.audio.newMusic(Gdx.files.internal("SFX/loopshot2.mp3"));
 		sounds.setLooping(true);
 		//sounds.play();
@@ -77,7 +77,7 @@ public class StartScreen extends MyScreen {
 		spriteBatch.setTransformMatrix(tranMatrix); // toda vez q redimensionar a tela, armazene as distor�oes na matriz
 
 		spriteBatch.begin();
-		spriteBatch.draw(texture, 0, 0, Utilities.GAME_WIDTH + 250, Utilities.GAME_HEIGHT);
+		spriteBatch.draw(texture, -250, 0, Utilities.GAME_WIDTH + 500, Utilities.GAME_HEIGHT);
 		/*
 		 * Logica para escrever estilo typewriter
 		 */
@@ -96,24 +96,6 @@ public class StartScreen extends MyScreen {
 			if (sounds.isPlaying())
 				sounds.stop();
 			bitmapFont.draw(spriteBatch, gameTitle, 100, 370);
-		}
-
-		// bitmapFont.draw(spriteBatch, gameTitle, 100, 370);
-
-		bitmapFont.getData().setScale(1);
-		if (!loaded)
-
-			bitmapFont.draw(spriteBatch, "Loading... " + progress + "%", 50, 100);
-		else {
-			if (visible) {
-				bitmapFont.draw(spriteBatch, "Touch to Start", 50, 100);
-			}
-			time += Gdx.graphics.getDeltaTime();
-			if (time >= 0.2f) {
-				visible = !visible;
-				time = 0;
-			}
-
 		}
 
 		spriteBatch.end();
