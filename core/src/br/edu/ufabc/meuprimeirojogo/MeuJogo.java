@@ -52,6 +52,7 @@ public class MeuJogo extends Game {
 			if (currentScreen.getId().equals("LOADING")) {
 				currentScreen = new Dungeon("DUNGEON");
 			} else {
+				//Trocar cenario
 				currentScreen = new StartScreen("LOADING", new String[] {"Cave", "Enemy", "Collectables", "Hero"});
 			}
 
