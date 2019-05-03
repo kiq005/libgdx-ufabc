@@ -105,13 +105,14 @@ public class GameObject extends ModelInstance{
 	public void setVisible(boolean visible) {
 		this.visible = visible;
 	}
+	
 	public boolean isAnimationFinished() {
 		return this.animationFinished;
 	}
-	public void resetAnimation() {
-		animationFinished = false;		
-	}
 	
+	public void resetAnimation() {
+		animationFinished = false;
+	}
 	
 	public float getAngle() {
 		return angle;

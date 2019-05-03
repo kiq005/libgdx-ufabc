@@ -98,9 +98,17 @@ public class Hero extends AbstractCharacter {
 				idle();
 			}
 		}
+		else if (state == BLOCKING) {
+			if(characters[state].isAnimationFinished() && !MeuJogo.inputHandler.deffend) {
+				characters[state].resetAnimation();
+				idle();
+			}
+		}
 		else {
 			if(MeuJogo.inputHandler.attack)
 				slash_attack();
+			else if(MeuJogo.inputHandler.deffend)
+				block();
 			else if(Math.abs(MeuJogo.inputHandler.y_axis) > 0 || Math.abs(MeuJogo.inputHandler.x_axis) > 0) {
 				if (MeuJogo.inputHandler.run)
 					run();
@@ -161,6 +169,12 @@ public class Hero extends AbstractCharacter {
 	
 	public void SetCounter(int n) {
 		enemyCounter = n;
+	}
+	
+	@Override
+	public void applyDamage(float damageAmount) {
+		if(state != BLOCKING)
+			this.healthPoints -= damageAmount; 
 	}
 	
 }

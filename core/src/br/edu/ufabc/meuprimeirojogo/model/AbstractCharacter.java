@@ -11,7 +11,7 @@ public abstract class AbstractCharacter extends AbstractModel {
 	public GameObject characters[];
 	
 	private float strength = 20;
-	private float healthPoints = 100;
+	protected float healthPoints = 100;
 	private float maxHealthPoints = 100;
 	
 	private Vector3 lastMovement;
