@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 
 import br.edu.ufabc.meuprimeirojogo.MeuJogo;
+import br.edu.ufabc.meuprimeirojogo.model.AbstractCharacter;
 import br.edu.ufabc.meuprimeirojogo.model.AbstractModel;
 import br.edu.ufabc.meuprimeirojogo.model.DungeonMap;
 import br.edu.ufabc.meuprimeirojogo.model.Enemy;
@@ -61,6 +62,18 @@ public class DungeonAction {
 					mapTypes[Utilities.random.nextInt(mapTypes.length)],
 					"Enemy", "Collectables", "Hero"});
 			creatingNewDungeon = true;
+		}
+		
+		// Collisions
+		for(int i=0; i<objects.size; ++i) {
+			if (objects.get(i) instanceof AbstractCharacter) {
+				AbstractCharacter o1 = (AbstractCharacter) objects.get(i); 
+				for(int j=i+1; j < objects.size; ++j) {
+					if (o1.collidesWith(objects.get(j))) {
+						o1.revertMovement();
+					}
+				}
+			}
 		}
 	}
 	

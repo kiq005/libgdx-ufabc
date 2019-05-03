@@ -74,11 +74,11 @@ public class DungeonRenderer {
 			if (o.getGameObject().isVisible())
 				modelBatch.render(o.getGameObject(), environment);
 		}
-		if (Commands.set[Commands.DEBUG]) {
+		/*if (Commands.set[Commands.DEBUG]) {
 			for (AbstractModel o : gameAction.objects) {
 				modelBatch.render(o.getGameObject().getBoxInstance(), environment);
 			}
-		}
+		}*/
 		modelBatch.end();
 		camera.update();
 		
