@@ -98,7 +98,7 @@ public class Enemy extends AbstractCharacter {
 
  	public void update(float delta) {
 		float heroDistance = this.getHeroDistance();
-		
+		characters[state].update(delta);
 		if (this.getHealthPoints() <= 0) {
 			die();
 		}
@@ -109,7 +109,7 @@ public class Enemy extends AbstractCharacter {
 					run();
 				break;
 			case RUNNING:
-				lookAtHero();
+				// lookAtHero();
 				if (heroDistance > this.visionBigRadius) 
 					idle();
 				else if (heroDistance <= this.visionSmallRadius) 
@@ -117,18 +117,23 @@ public class Enemy extends AbstractCharacter {
 				else {
 					this.setPosition( getPosition().sub(hero.getPosition()).nor().scl(-speed) );
 					
-					//Vector3 enemyPosition = this.getPosition();
-					//enemyPosition.interpolate(hero.getPosition(), 0.1f, Interpolation.linear);
-					//this.setPosition(enemyPosition);
+//					Vector3 enemyPosition = this.getPosition();
+//					enemyPosition.interpolate(hero.getPosition(), 0.1f, Interpolation.linear);
+//					this.setPosition(enemyPosition);
 				}
 				break;
 			case ATTACKING:
-				lookAtHero();
+				// lookAtHero();
 				if (this.getGameObject().isAnimationFinished()) {
-					if (heroDistance <= this.visionSmallRadius)
+					if (heroDistance <= this.visionSmallRadius) {
 						hero.applyDamage(this.getStrength());
+						
+					}
+					this.getGameObject().resetAnimation();
 					idle();
 				}
+				
+				
 				break;
 			case DYING:
 				if (this.getGameObject().isAnimationFinished()) 
@@ -138,7 +143,7 @@ public class Enemy extends AbstractCharacter {
 				break;
 			}
 		}
-		characters[state].update(delta);
+		
 	}
  	
 	public float getHeroDistance() {
