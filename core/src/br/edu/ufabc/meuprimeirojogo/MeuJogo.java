@@ -12,6 +12,7 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g3d.Model;
+import com.badlogic.gdx.graphics.g3d.particles.ParticleSystem;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.math.Vector3;
 
@@ -31,12 +32,12 @@ public class MeuJogo extends Game {
 	public static ModelBuilder modelBuider;
 	public static boolean DEBUG = false;
 	public static InputHandler inputHandler;
+	public static ParticleSystem particleSystem;
 
 	@Override
 	public void create() {
 		inputHandler = new InputHandler();
-		//Gdx.input.setInputProcessor(inputHandler);
-		
+		particleSystem = new ParticleSystem();
 		modelManager = new ModelManager();
 		modelBuider  = new ModelBuilder();
 		
@@ -47,6 +48,8 @@ public class MeuJogo extends Game {
 	public void render() {
 		inputHandler.update();
 		currentScreen.render(Gdx.graphics.getDeltaTime());
+		particleSystem.update();
+		
 		if (currentScreen.isDone()) {
 			// aqui eu cuido da transição das telas
 			if (currentScreen.getId().equals("LOADING")) {
