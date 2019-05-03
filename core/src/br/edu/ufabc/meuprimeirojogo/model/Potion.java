@@ -1,6 +1,10 @@
 package br.edu.ufabc.meuprimeirojogo.model;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g3d.Material;
 import com.badlogic.gdx.graphics.g3d.Model;
+import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
+
 import br.edu.ufabc.meuprimeirojogo.MeuJogo;
 import br.edu.ufabc.meuprimeirojogo.core.GameObject;
 
@@ -22,11 +26,13 @@ public class Potion extends AbstractCollectable {
 		collectables = new GameObject[2];
 		collectables[UNCOLLECTED] = new GameObject(modelUncollectedPotion, true, false, false, 0.0f);
 		collectables[COLLECTED] = new GameObject(modelCollectedPotion, true, false, false, 0.0f);
-
 	}
 	
  	private void collect() {
- 		state = COLLECTED;
+ 		//state = COLLECTED;
+ 		for(Material m : collectables[UNCOLLECTED].materials) {
+			m.set(ColorAttribute.createDiffuse(Color.GRAY));
+		}
  	}
 	
 	public float getHealthToRestore() {
