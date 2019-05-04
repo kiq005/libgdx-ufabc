@@ -327,6 +327,11 @@ public class DungeonMap {
 			potion.setPosition(x * tile_size, 2.55f, y * tile_size);
 			objects[x][y] = potion;
 		}
+		else if( Math.random() < .0125f) {
+			Spikes spikes = new Spikes(5, hero);
+			spikes.setPosition(x * tile_size, 2.55f, y * tile_size);
+			objects[x][y] = spikes;
+		}
 		else {
 			double objectSelection = Math.random() * 30;
 			
