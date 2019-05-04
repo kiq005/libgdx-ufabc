@@ -58,9 +58,9 @@ public class DungeonAction {
 		
 		if(map.CountEnemies() <= 0) {
 			++level;
-			String[] mapTypes = new String[] {"Castle", "Cave", "Cemetery", "Forest"};
+			String[] mapTypes = new String[] {"Cave", "Castle", "Cemetery", "Forest"};
 			MeuJogo.modelManager.loadBundle(new String[] {
-					mapTypes[Utilities.random.nextInt(mapTypes.length)],
+					mapTypes[level % mapTypes.length],
 					"Enemy", "Collectables", "Hero"});
 			creatingNewDungeon = true;
 		}

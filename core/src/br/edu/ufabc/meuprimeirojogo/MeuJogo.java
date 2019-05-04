@@ -27,7 +27,7 @@ public class MeuJogo extends Game {
 	public static boolean DEBUG = false;
 	public static InputHandler inputHandler;
 	public static ParticleSystem particleSystem;
-	public static String[] assetsToLoad = new String[] {"Cave", "Enemy", "Collectables", "Hero"};
+	public static String[] assetsToLoad = new String[] {"Castle", "Enemy", "Collectables", "Hero"};
 	private Music sounds;
 	
 	@Override
