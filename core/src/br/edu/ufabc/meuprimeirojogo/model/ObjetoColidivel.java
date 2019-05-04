@@ -6,6 +6,7 @@ import br.edu.ufabc.meuprimeirojogo.core.GameObject;
 
 public class ObjetoColidivel extends AbstractModel{
 	private GameObject currentObject;
+	
 	public ObjetoColidivel(Model model) {
 		super(true, false);
 		currentObject = new GameObject(model);

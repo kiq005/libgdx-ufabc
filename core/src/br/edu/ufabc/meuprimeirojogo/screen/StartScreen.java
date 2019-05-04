@@ -46,9 +46,9 @@ public class StartScreen extends MyScreen {
 		viewMatrix = new Matrix4();
 		tranMatrix = new Matrix4();
 		bitmapFont = new BitmapFont(Gdx.files.internal("Fonts/diabloFont.fnt"));
-		sounds = Gdx.audio.newMusic(Gdx.files.internal("SFX/loopshot2.mp3"));
+		sounds = Gdx.audio.newMusic(Gdx.files.internal("Sounds/Game_sound.mp3"));
 		sounds.setLooping(true);
-		//sounds.play();
+		sounds.play();
 	}
 
 	@Override
@@ -102,8 +102,8 @@ public class StartScreen extends MyScreen {
 				}
 			}
 		} else {
-			if (sounds.isPlaying())
-				sounds.stop();
+			// if (sounds.isPlaying())
+			//     sounds.stop();
 			bitmapFont.draw(spriteBatch, gameTitle, 100, 370);
 		}
 
