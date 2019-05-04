@@ -1,13 +1,11 @@
 package br.edu.ufabc.meuprimeirojogo.screen;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Matrix4;
-
 import br.edu.ufabc.meuprimeirojogo.MeuJogo;
 import br.edu.ufabc.meuprimeirojogo.util.Utilities;
 
@@ -26,7 +24,7 @@ public class StartScreen extends MyScreen {
 	private float stringTime = 0.0f;
 	private int stringIndex = 1;
 	private boolean stringDone = false;
-	private Music sounds;
+
 
 	public StartScreen(String id, String[] bundlesToLoad) {
 		super(id);
@@ -46,9 +44,7 @@ public class StartScreen extends MyScreen {
 		viewMatrix = new Matrix4();
 		tranMatrix = new Matrix4();
 		bitmapFont = new BitmapFont(Gdx.files.internal("Fonts/diabloFont.fnt"));
-		sounds = Gdx.audio.newMusic(Gdx.files.internal("Sounds/Game_sound.mp3"));
-		sounds.setLooping(true);
-		sounds.play();
+
 	}
 
 	@Override

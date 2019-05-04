@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.particles.ParticleSystem;
@@ -27,7 +28,8 @@ public class MeuJogo extends Game {
 	public static InputHandler inputHandler;
 	public static ParticleSystem particleSystem;
 	public static String[] assetsToLoad = new String[] {"Cave", "Enemy", "Collectables", "Hero"};
-
+	private Music sounds;
+	
 	@Override
 	public void create() {
 		inputHandler = new InputHandler();
@@ -37,6 +39,10 @@ public class MeuJogo extends Game {
 		
 		currentScreen = new StartScreen("LOADING", assetsToLoad);
 		setScreen(currentScreen);
+		
+		sounds = Gdx.audio.newMusic(Gdx.files.internal("Sounds/Game_sound.mp3"));
+		sounds.setLooping(true);
+		
 	}
 
 	public void render() {
@@ -47,10 +53,12 @@ public class MeuJogo extends Game {
 		if (currentScreen.isDone()) {
 			// aqui eu cuido da transição das telas
 			if (currentScreen.getId().equals("LOADING")) {
+				sounds.play();
 				currentScreen = new Dungeon("DUNGEON");
 			} else if (currentScreen.getId().equals("DUNGEON")) {
 				//Trocar cenario
 				currentScreen = new EndScreen("YOUDIED");
+				sounds.stop();
 			}
 			else {
 				currentScreen = new StartScreen("LOADING");
