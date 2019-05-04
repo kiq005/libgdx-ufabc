@@ -26,6 +26,7 @@ public class Enemy extends AbstractCharacter {
 	private Hero hero;
 	private float visionBigRadius;
 	private float visionSmallRadius;
+	private String enemyType;
 	
 	private static final float speed = 5f;
 	
@@ -50,6 +51,7 @@ public class Enemy extends AbstractCharacter {
 		if (enemyType < 0 || enemyType > 2) {
 			enemyType = 0;
 		}
+		this.enemyType = enemyMap.get(enemyType);
 		
 		Model modelIdle = MeuJogo.modelManager.getModel(enemyMap.get(enemyType) + "Idle");
 		Model modelWalk = MeuJogo.modelManager.getModel(enemyMap.get(enemyType) + "Running");
@@ -93,7 +95,6 @@ public class Enemy extends AbstractCharacter {
  		
  		
  		this.setRotation( (angle - curAngle) );
- 		
  	}
 
  	public void update(float delta) {
@@ -148,6 +149,10 @@ public class Enemy extends AbstractCharacter {
  	
 	public float getHeroDistance() {
 		return hero.getPosition().dst(this.getPosition());
+	}
+	
+	public String GetType() {
+		return enemyType;
 	}
 
 	

@@ -167,14 +167,24 @@ public class Hero extends AbstractCharacter {
 		this.enemy = enemy;
 	}
 	
+	public Enemy GetEnemy() {
+		return this.enemy;
+	}
+	
 	public void SetCounter(int n) {
 		enemyCounter = n;
+	}
+	
+	public int GetCounter() {
+		return enemyCounter;
 	}
 	
 	@Override
 	public void applyDamage(float damageAmount) {
 		if(state != BLOCKING)
 			this.healthPoints -= damageAmount; 
+		if (this.healthPoints <= 0) this.healthPoints = 0;
+		if (this.healthPoints >= this.getMaxHealthPoints()) this.healthPoints = this.getMaxHealthPoints();
 	}
 	
 }

@@ -10,14 +10,13 @@ import br.edu.ufabc.meuprimeirojogo.core.GameObject;
 
 public class Potion extends AbstractCollectable {
 	
-	private static boolean collidable = true;
 	private static boolean moveable = false;
 
 	private Hero hero;
 	private float healthToRestore;
 	
 	public Potion(float healthToRestore, Hero hero) {
-		super(collidable, moveable);
+		super(moveable);
 		state = UNCOLLECTED;
 		this.setHealthToRestore(healthToRestore);
 		Model modelUncollectedPotion = MeuJogo.modelManager.getModel("uncollectedPotion");
@@ -26,6 +25,8 @@ public class Potion extends AbstractCollectable {
 		collectables = new GameObject[2];
 		collectables[UNCOLLECTED] = new GameObject(modelUncollectedPotion, true, false, false, 0.0f);
 		collectables[COLLECTED] = new GameObject(modelCollectedPotion, true, false, false, 0.0f);
+		
+		this.hero = hero;
 	}
 	
  	private void collect() {

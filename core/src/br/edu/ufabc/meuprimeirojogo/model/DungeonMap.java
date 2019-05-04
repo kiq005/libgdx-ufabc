@@ -57,7 +57,8 @@ public class DungeonMap {
 		this.level = level;
 		enemies = new ArrayList<>();
 		
-		int[][] map = GenerateArena(width, height);
+		int[][] map = GenerateMaze(width, height);
+		AdjustTiles(map);
 		/*
 		switch(Utilities.random.nextInt(4)) {
 		case 0:
@@ -313,13 +314,18 @@ public class DungeonMap {
 			
 			objects[x][y] = hero;
 		}
-		else if( enemies.size() < level && Math.random() < .0125f) {
-			Enemy enemy = new Enemy(20, 7, 20, 100, (int)(Math.random() * Enemy.enemyMap.size()), hero);
+		else if( x + y > 5 * (enemies.size()/level) && Math.random() < .125f ) {
+			Enemy enemy = new Enemy(20, 8, 20, 100, (int)(Math.random() * Enemy.enemyMap.size()), hero);
 			enemy.setPosition(x * tile_size, 2.55f, y * tile_size);
 			enemy.setScale(0.03f);
 			enemies.add(enemy);
 			
 			objects[x][y] = enemy;
+		}
+		else if( Math.random() < .0125f) {
+			Potion potion = new Potion(100, hero);
+			potion.setPosition(x * tile_size, 2.55f, y * tile_size);
+			objects[x][y] = potion;
 		}
 		else {
 			double objectSelection = Math.random() * 30;

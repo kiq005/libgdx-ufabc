@@ -4,7 +4,7 @@ import com.badlogic.gdx.math.Vector3;
 
 import br.edu.ufabc.meuprimeirojogo.core.GameObject;
 
-public abstract class AbstractCollectable extends AbstractModel {
+public abstract class AbstractCollectable extends ObjetoColidivel {
 	
 	public int state;
 
@@ -13,8 +13,8 @@ public abstract class AbstractCollectable extends AbstractModel {
 	public static final int UNCOLLECTED = 0;
 	public static final int COLLECTED   = 1;
 	
-	public AbstractCollectable(boolean collidable, boolean moveable) {
-		super(collidable, moveable);
+	public AbstractCollectable(boolean moveable) {
+		super(moveable);
 	}
 	
 	@Override

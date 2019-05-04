@@ -2,6 +2,7 @@ package br.edu.ufabc.meuprimeirojogo.core;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import br.edu.ufabc.meuprimeirojogo.model.Hero;
@@ -23,6 +24,8 @@ public class HUD {
 	
 	private DungeonAction action;
 	
+	private BitmapFont bitmapFont;
+	
 	public HUD(DungeonAction action) {
 		this.action = action;
 		
@@ -39,6 +42,8 @@ public class HUD {
 		_power_speed = new Texture(Gdx.files.internal("UI/HUD/power-speed.png"));
 		_power_sword = new Texture(Gdx.files.internal("UI/HUD/power-sword.png"));
 		_power_water = new Texture(Gdx.files.internal("UI/HUD/power-water.png"));
+		
+		bitmapFont = new BitmapFont(Gdx.files.internal("Fonts/diabloFont.fnt"));
 	}
 
 	public void draw(SpriteBatch batch) {
@@ -48,6 +53,13 @@ public class HUD {
 		
 		batch.draw(_power_box, 80, 10, 40, 40);
 		batch.draw(_power_sword, 80, 10, 40, 40);
+		
+		bitmapFont.draw(batch, String.valueOf(action.hero.GetCounter()), 100, 100);
+		if(action.hero.GetEnemy() != null) {
+			System.out.println("HAS ENEMY");
+			bitmapFont.draw(batch, action.hero.GetEnemy().GetType(), 10, 200);
+		}
+		
 	}
 	
 }

@@ -18,7 +18,7 @@ public class DungeonAction {
 	protected Array<AbstractModel> objects;
 	protected Hero hero;
 	
-	private float attack_radious = 5f;
+	private float attack_radious = 14f;
 	private int level = 1;
 	private DungeonMap map;
 	
@@ -31,13 +31,13 @@ public class DungeonAction {
 	}
 
 	public void update(float delta) {
-		float minDistToHero = attack_radious;
-		
 		if(creatingNewDungeon) {
 			updateCreationProcess();
 			return;
 		}
 		
+		float minDistToHero = attack_radious;
+		hero.SetEnemy(null);
 		for (AbstractModel o : objects) {
 			o.update(delta);
 			if( o instanceof Enemy) {
@@ -52,7 +52,6 @@ public class DungeonAction {
 			}
 		}
 		
-		hero.SetEnemy(null);
 		hero.SetCounter(map.CountEnemies());
 		
 		if(map.CountEnemies() <= 0) {
@@ -65,6 +64,7 @@ public class DungeonAction {
 		}
 		
 		// Collisions
+		/*
 		for(int i=0; i<objects.size; ++i) {
 			if (objects.get(i) instanceof AbstractCharacter) {
 				AbstractCharacter o1 = (AbstractCharacter) objects.get(i); 
@@ -74,7 +74,7 @@ public class DungeonAction {
 					}
 				}
 			}
-		}
+		}*/
 	}
 	
 	private void updateCreationProcess() {
