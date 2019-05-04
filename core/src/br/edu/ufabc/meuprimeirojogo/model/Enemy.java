@@ -40,7 +40,7 @@ public class Enemy extends AbstractCharacter {
 	HashMap<String, String> enemyTypes = new HashMap<String, String>();
 	
  	public Enemy(float visionBigRadius, float visionSmallRadius, float strength, float healthPoints, int enemyType, Hero hero) {
- 		super(collidable, moveable, strength, healthPoints);
+ 		super(moveable, strength, healthPoints);
 		state = IDLE;
 		this.visionBigRadius = visionBigRadius;
 		this.visionSmallRadius = visionSmallRadius;

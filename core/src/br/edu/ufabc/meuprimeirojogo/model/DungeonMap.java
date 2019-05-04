@@ -10,6 +10,7 @@ import com.badlogic.gdx.utils.Array;
 import br.edu.ufabc.meuprimeirojogo.MeuJogo;
 import br.edu.ufabc.meuprimeirojogo.core.GameObject;
 import br.edu.ufabc.meuprimeirojogo.core.MazeGenerator;
+import br.edu.ufabc.meuprimeirojogo.util.Utilities;
 
 public class DungeonMap {
 	
@@ -42,6 +43,8 @@ public class DungeonMap {
 	
 	private static final int SINGLE_WALL = 1;
 	
+	private static final float tile_size = 10f;
+	
 	private int level;
 
 	public DungeonMap(int width, int height, int level) {
@@ -54,13 +57,35 @@ public class DungeonMap {
 		this.level = level;
 		enemies = new ArrayList<>();
 		
-		int[][] map = GenerateMaze(width, height);
-		AdjustTiles(map);
+		int[][] map = GenerateArena(width, height);
+		/*
+		switch(Utilities.random.nextInt(4)) {
+		case 0:
+			map = GenerateMaze(width, height);
+			AdjustTiles(map);
+			break;
+		case 1:
+			map = GenerateArena(width, height);
+			break;
+		case 2:
+			map = GenerateMaze(width, height);
+			break;
+		case 3:
+			map = GenerateMaze(width, height);
+			break;
+		case 4:
+			map = GenerateMaze(width, height);
+			break;
+		default:
+			map = GenerateMaze(width, height);
+			AdjustTiles(map);
+		}
+		*/
 		
 		for(int x = 0; x < width; ++x) {
 			for(int y = 0; y < height; ++y) {
 				ground[x][y] = new ObjetoColidivel(MeuJogo.modelManager.getModel("ground"));
-				ground[x][y].getGameObject().transform.setToTranslation(new Vector3(x * 10, 0, y * 10));
+				ground[x][y].getGameObject().transform.setToTranslation(new Vector3(x * tile_size, 0, y * tile_size));
 				
 				String model_name = "ground";
 				switch(map[x][y]) {
@@ -114,7 +139,7 @@ public class DungeonMap {
 				Model go = MeuJogo.modelManager.getModel(model_name);
 				
 				walls[x][y] = new ObjetoColidivel(go);
-				walls[x][y].getGameObject().transform.setToTranslation(new Vector3(x * 10, 0, y * 10));
+				walls[x][y].getGameObject().transform.setToTranslation(new Vector3(x * tile_size, 0, y * tile_size));
 				
 				switch(map[x][y]) {
 				case GROUND:
@@ -202,6 +227,23 @@ public class DungeonMap {
 		}
 	}
 	
+	public int[][] GenerateArena(int width, int height){
+		int[][] map = new int[width][height];
+		
+		for(int x = 0; x < width; ++x) {
+			for(int y = 0; y < height; ++y) {
+				if( x + y < (width + height)/3 ) {
+					map[x][y] = 1;
+				}
+				else {
+					map[x][y] = 0;
+				}
+			}
+		}
+		
+		return map;
+	}
+	
 	public int[][] GenerateMaze(int width, int height){
 		MazeGenerator mg = new MazeGenerator(width, height);
 		int[][] map = mg.GetMaze();
@@ -257,9 +299,6 @@ public class DungeonMap {
 				if(this.objects[x][y] != null) objects.add(this.objects[x][y]);
 			}
 		}
-		
-		enemies.forEach( e -> objects.add(e));
-		objects.add(hero);
 	}
 	
 	public Hero GetHero() {
@@ -269,14 +308,18 @@ public class DungeonMap {
 	private void AddObject(int x, int y) {
 		if(hero == null) {
 			hero = new Hero(35, 200);
-			hero.setPosition(x + 7.5f, 2.55f, y + 7.5f);
+			hero.setPosition(x * tile_size, 2.55f, y * tile_size);
 			hero.setScale(0.03f);
+			
+			objects[x][y] = hero;
 		}
 		else if( enemies.size() < level && Math.random() < .0125f) {
 			Enemy enemy = new Enemy(20, 3, 20, 100, (int)(Math.random() * Enemy.enemyMap.size()), hero);
-			enemy.setPosition(x + 7.5f, 2.55f, y + 7.5f);
+			enemy.setPosition(x * tile_size, 2.55f, y * tile_size);
 			enemy.setScale(0.03f);
 			enemies.add(enemy);
+			
+			objects[x][y] = enemy;
 		}
 		else {
 			double objectSelection = Math.random() * 30;
@@ -313,7 +356,7 @@ public class DungeonMap {
 			
 			Model go = MeuJogo.modelManager.getModel(model_name);
 			objects[x][y] = new ObjetoColidivel(go);
-			objects[x][y].getGameObject().transform.setToTranslation(new Vector3(x * 10, 0, y * 10));
+			objects[x][y].getGameObject().transform.setToTranslation(new Vector3(x * tile_size, 0, y * tile_size));
 		}
 	}
 	

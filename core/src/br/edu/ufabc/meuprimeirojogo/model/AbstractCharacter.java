@@ -4,7 +4,7 @@ import com.badlogic.gdx.math.Vector3;
 
 import br.edu.ufabc.meuprimeirojogo.core.GameObject;
 
-public abstract class AbstractCharacter extends AbstractModel {
+public abstract class AbstractCharacter extends ObjetoColidivel {
 
 	public int state;
 
@@ -16,12 +16,12 @@ public abstract class AbstractCharacter extends AbstractModel {
 	
 	private Vector3 lastMovement;
 	
-	public AbstractCharacter(boolean collidable, boolean moveable) {
-		super(collidable, moveable);
+	public AbstractCharacter(boolean moveable) {
+		super(moveable);
 	}
 		
-	public AbstractCharacter(boolean collidable, boolean moveable, float customStrength, float customHealthPoints) {
-		super(collidable, moveable);
+	public AbstractCharacter(boolean moveable, float customStrength, float customHealthPoints) {
+		super(moveable);
 		this.strength = customStrength;
 		this.healthPoints = customHealthPoints;
 		this.maxHealthPoints = customHealthPoints;

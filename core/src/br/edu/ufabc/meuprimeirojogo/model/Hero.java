@@ -38,7 +38,7 @@ public class Hero extends AbstractCharacter {
 	
 	public Hero(float strength, float healthPoints) 
 	{
- 		super(collidable, moveable, strength, healthPoints);
+ 		super(moveable, strength, healthPoints);
 		state = IDLE;	
 		
 		Model modelIdle = MeuJogo.modelManager.getModel("heroIdle");

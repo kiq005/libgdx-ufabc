@@ -11,6 +11,10 @@ public class ObjetoColidivel extends AbstractModel{
 		currentObject = new GameObject(model);
 	}
 	
+	public ObjetoColidivel(boolean movable) {
+		super(true, movable);
+	}
+	
 	public ObjetoColidivel(GameObject go) {
 		super(true, false);
 		currentObject = go;
