@@ -1,4 +1,6 @@
 {
     "uncollectedPotion": "./Level/g3db/bottle.g3db",
-    "collectedPotion": "./Level/g3db/bottleLarge.g3db"
+    "collectedPotion": "./Level/g3db/bottleLarge.g3db",
+    "activeSpike": "./Level/g3db/spikes.g3db",
+    "inactiveSpike": "./Level/g3db/spikesHidden.g3db"
 }
