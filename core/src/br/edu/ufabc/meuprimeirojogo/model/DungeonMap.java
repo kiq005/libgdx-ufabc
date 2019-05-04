@@ -314,7 +314,7 @@ public class DungeonMap {
 			objects[x][y] = hero;
 		}
 		else if( enemies.size() < level && Math.random() < .0125f) {
-			Enemy enemy = new Enemy(20, 3, 20, 100, (int)(Math.random() * Enemy.enemyMap.size()), hero);
+			Enemy enemy = new Enemy(20, 7, 20, 100, (int)(Math.random() * Enemy.enemyMap.size()), hero);
 			enemy.setPosition(x * tile_size, 2.55f, y * tile_size);
 			enemy.setScale(0.03f);
 			enemies.add(enemy);
