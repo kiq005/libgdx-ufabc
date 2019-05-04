@@ -36,8 +36,8 @@ public class DungeonAction {
 			return;
 		}
 		
+		boolean foundEnemy = false;
 		float minDistToHero = attack_radious;
-		hero.SetEnemy(null);
 		for (AbstractModel o : objects) {
 			o.update(delta);
 			if( o instanceof Enemy) {
@@ -48,10 +48,12 @@ public class DungeonAction {
 				if(dist < minDistToHero) {
 					minDistToHero = dist;
 					hero.SetEnemy(enemy);
+					foundEnemy = true;
 				}
 			}
 		}
 		
+		if(!foundEnemy) hero.SetEnemy(null);
 		hero.SetCounter(map.CountEnemies());
 		
 		if(map.CountEnemies() <= 0) {

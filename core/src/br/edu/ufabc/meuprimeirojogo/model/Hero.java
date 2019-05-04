@@ -94,7 +94,9 @@ public class Hero extends AbstractCharacter {
 		else if(state == ATTACKING || state == SLASH_ATTACKING) {
 			if(characters[state].isAnimationFinished()) {
 				characters[state].resetAnimation();
-				if(enemy != null) enemy.applyDamage(this.getStrength());
+				if(this.enemy != null) {
+					this.enemy.applyDamage(this.getStrength());
+				}
 				idle();
 			}
 		}

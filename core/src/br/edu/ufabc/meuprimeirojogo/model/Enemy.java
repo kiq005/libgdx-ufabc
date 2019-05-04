@@ -155,5 +155,10 @@ public class Enemy extends AbstractCharacter {
 		return enemyType;
 	}
 
+	@Override
+	public void applyDamage(float damageAmount) {
+		System.out.println("HIT");
+		this.healthPoints -= damageAmount; 
+	}
 	
 }

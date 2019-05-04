@@ -56,7 +56,6 @@ public class HUD {
 		
 		bitmapFont.draw(batch, String.valueOf(action.hero.GetCounter()), 100, 100);
 		if(action.hero.GetEnemy() != null) {
-			System.out.println("HAS ENEMY");
 			bitmapFont.draw(batch, action.hero.GetEnemy().GetType(), 10, 200);
 		}
 		
